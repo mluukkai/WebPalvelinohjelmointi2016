@@ -1079,7 +1079,7 @@ group :production do
 end
 ```
 
-sekä (tai joku se Ruby-versio, mitä käytät):
+sekä (tai se Ruby-versio, mitä käytät):
 
 ```ruby
 ruby '2.3.0'
