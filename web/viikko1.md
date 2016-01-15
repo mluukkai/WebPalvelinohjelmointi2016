@@ -45,7 +45,7 @@ Tällä kurssilla käytämme Web-sovellusten toteuttamiseen Ruby on Rails -sovel
 
 Rails-sovellukset noudattavat [MVC-mallia](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) (tai WebMVC:tä, joka poikkeaa hiukan alkuperäisestä MVC:stä), jossa ideana on jakaa sovelluksen data- ja sovelluslogiikka (Model), näyttöjen muodostaminen (View) ja toiminnan koordinointi (Controller) selkeästi eriytettyihin osiin. Lähes kaikki moderni web-kehitys nykyään tapahtuu MVC-periaatetta noudattaen. MVC:n lisäksi moderneissa web-sovelluksissa on tosin myös kerrosarkkitehtuurien, palveluperustaisien arkkitehtuurien (SOA) tai juuri nyt kovan kohun alla olevien [miktopalveluarkkitehtuurien](http://martinfowler.com/articles/microservices.html) piirteitä.
 
-Tutkitaan mitä tapahtuu kun käyttäjä menee Railsilla toteutetulle web-sivulle, olkoon sivun URL esim. [http://wad-ratebeer.herokuapp.com//breweries](http://wad-ratebeer.herokuapp.com//breweries), eli kurssin aikana tekemämme esimerkkisovelluksen sivu, joka listaa kaikki esimerkkisovelluksen tuntemat panimot.
+Tutkitaan mitä tapahtuu kun käyttäjä menee Railsilla toteutetulle web-sivulle, olkoon sivun URL esim. [http://wad-ratebeer.herokuapp.com/breweries](http://wad-ratebeer.herokuapp.com/breweries), eli kurssin aikana tekemämme esimerkkisovelluksen sivu, joka listaa kaikki esimerkkisovelluksen tuntemat panimot.
 
 ![mvc-kuva](http://www.cs.helsinki.fi/u/mluukkai/rails_mvc.png)
 
@@ -1181,7 +1181,7 @@ irb(main):001:0> Brewery.all
 
 Kyseessä on normaali Rails-konsolisessio, eli voit esim. tutkia Herokuun deployatun sovelluksen tietokannan tilaa session avulla.
 
-## Riippuvuuksien hallinta ja suoritusympäristöt
+## Riippuvuuksien hallinta
 
 Kuten edellisessä luvussa mainittiin Rails-sovelluksen käyttämät kirjastot eli _gemit_ on määritelty sovelluksen juuressa olevassa Gemfile-nimisessä tiedostossa.
 
@@ -1205,6 +1205,8 @@ Gemfile siis listaa joukon gemejä, joita sovellus käyttää. Kuten huomaamme, 
 Riippuvuudet ladataan osoitteesta https://rubygems.org Bundler-ohjelmaa, ks. http://bundler.io/ käyttäen antamalla komentoriviltä komento <code>bundle install</code>. Bundler lataa gemit ja niiden riippuvuudet rubygems.org:ista ja tämän jälkeen sovellus on valmiina käytettäväksi.
 
 Kun <code>bundle install</code> on suoritettu ensimmäisen kerran, syntyy tiedosto <code>Gemfile.lock</code> joka määrittelee tarkasti mitkä versiot gemeistä on asennettu. Gemfilehän ei määrittele välttämättä tarkkoja versioita. Tämän jälkeen kutsuttaessa <code>bundle install</code> asennetaan Gemfile.lock tiedostossa määritellyt versiot. Suorittamalla <code>bundle update</code> saadaan tarvittaessa ladattua uusimmat gemit ja luodaan uusi Gemfile.lock-tiedosto. Katso tarkemmin Bundlerin toiminnasta ositteesta http://bundler.io/v1.5/rationale.html
+
+## Suoritusympäristöt
 
 Rails tarjoaa oletusarvoisesti kolme eri suoritusympäristöä
 * development eli sovelluskehitykseen tarkoitettu ympäristö
