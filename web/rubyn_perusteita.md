@@ -77,7 +77,7 @@ irb(main):014:0> h3 = { :nimi => "Esko", :osoite => "Westend" }
 ```
 
 lue seuraavista ainakin ensimmäinen:
-* https://www.railstutorial.org/book/rails-flavored-ruby#sec-hashes_and_symbols
+* https://www.railstutorial.org/book/rails_flavored_ruby#sec-hashes_and_symbols
 * http://ruby.learncodethehardway.org/book/ex39.html
 * http://rubylearning.com/satishtalim/ruby_hashes.html
 
@@ -116,7 +116,7 @@ irb(main):026:0>
 ```
 
 lue seuraavista ainakin ensimmäinen
-* https://www.railstutorial.org/book/rails-flavored-ruby#sec-arrays_and_ranges
+* https://www.railstutorial.org/book/rails_flavored_ruby#sec-arrays_and_ranges
 * http://www.techotopia.com/index.php/Understanding_Ruby_Arrays
 * http://rubylearning.com/satishtalim/ruby_arrays.html
 
@@ -149,12 +149,12 @@ end
 Yleensä käytäntönä on määritellä lohko aaltosulkeilla jos kyseessä on yhdelle riville mahtuva lohko, pitemmät lohkot taas määritellään yleensä do:n ja end:in avulla.
 
 lisätietoja
-* https://www.railstutorial.org/book/rails-flavored-ruby#sec-blocks
+* https://www.railstutorial.org/book/rails_flavored_ruby#sec-blocks
 
 # merkkijonot
 
 ks.
-* https://www.railstutorial.org/book/rails-flavored-ruby#sec-strings
+* https://www.railstutorial.org/book/rails_flavored_ruby#sec-strings
 * http://ruby.learncodethehardway.org/book/ex6.html
 
 # moduuli
