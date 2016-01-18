@@ -5,7 +5,7 @@ Web-sovellusten toimintaperiaate on periaatteessa yksinkertainen. Käyttäjä av
 
 Palvelimen palauttama www-sivu voi olla __staattinen__, eli "käsin" palvelimella sijaitsevaan html-tiedostoon kirjoitettu tai __dynaaminen__, eli esim. palvelimen tietokannassa olevan datan perusteella pyynnön yhteydessä generoitu. Esim. sivulla http://www.cs.helsinki.fi/courses oleva kurssien lista luetaan tietokannasta ja sivun renderöivä html-koodi muodostetaan aina uudelleen sivulle mentäessä, senhetkisen tietokannassa olevan kurssien listan perusteella.
 
-Toisinaan www-sivuilla tiedon kulun suunta muuttuu ja dataa lähtetetään selaimelta palvelimelle. Useimmiten tämä tapahtuu siten, että sivustolla on _lomake_, jolle käyttäjä syöttää palvelimelle lähetettävät tiedot. Tietojen lähettämistä varten HTTP-protokolla tarjoaa metodin POST (myös HTTP:n GET-metodia voi käyttää tietojen lähettämiseen).  Esim. laitoksen www-sivujen yläkulmassa on lomake "Hae tältä sivustolta", jonka avulla sivun käyttäjä voi lähettää web-palvelimelle dataa. Kun käyttäjä painaa nappia "hae", selain lähettää palvelimelle http://www.cs.helsinki.fi POST-metodilla varustetun pyynnön, jonka mukana lähetetään käyttäjän lomakkeelle kirjoittama merkkijono. Palvelin vastaa lomakkeen lähetyksen yhteydessä tehtäviin POST-kutsuihin useimmiten palauttamalla uuden HTML-tiedoston, jonka selain sitten renderöi käyttäjälle. (Todellisuudessa POST-kutsuihin ei yleensä vastata palauttamalla html-sivua, vaan suoritetaan ns. uudelleenohjaus renderöitävän html-koodin sisältävälle sivulle ks. http://en.wikipedia.org/wiki/Post/Redirect/Get asiasta tarkemmin toisella viikolla)
+Toisinaan www-sivuilla tiedon kulun suunta muuttuu ja dataa lähetetään selaimelta palvelimelle. Useimmiten tämä tapahtuu siten, että sivustolla on _lomake_, jolle käyttäjä syöttää palvelimelle lähetettävät tiedot. Tietojen lähettämistä varten HTTP-protokolla tarjoaa metodin POST (myös HTTP:n GET-metodia voi käyttää tietojen lähettämiseen).  Esim. laitoksen www-sivujen yläkulmassa on lomake "Hae tältä sivustolta", jonka avulla sivun käyttäjä voi lähettää web-palvelimelle dataa. Kun käyttäjä painaa nappia "hae", selain lähettää palvelimelle http://www.cs.helsinki.fi POST-metodilla varustetun pyynnön, jonka mukana lähetetään käyttäjän lomakkeelle kirjoittama merkkijono. Palvelin vastaa lomakkeen lähetyksen yhteydessä tehtäviin POST-kutsuihin useimmiten palauttamalla uuden HTML-tiedoston, jonka selain sitten renderöi käyttäjälle. (Todellisuudessa POST-kutsuihin ei yleensä vastata palauttamalla html-sivua, vaan suoritetaan ns. uudelleenohjaus renderöitävän html-koodin sisältävälle sivulle ks. http://en.wikipedia.org/wiki/Post/Redirect/Get asiasta tarkemmin toisella viikolla)
 
 HTTP-pyyntöihin ja vastauksiin liittyy osoitteen, datan (eli viestin rungon, engl. body) ja [statuskoodien](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes) lisäksi myös otsikoissa eli __headereissä__ lähetettyä dataa (ks.
 http://en.wikipedia.org/wiki/List_of_HTTP_header_fields), joiden avulla tarkennetaan pyyntöjä ja niihin liittyviä vastauksia, esim. määritellään minkä tyyppistä dataa selain on valmis vastaanottamaan.
@@ -67,7 +67,7 @@ Tutkitaan mitä tapahtuu kun käyttäjä menee Railsilla toteutetulle web-sivull
 
 MVC-mallissa modelit ovat useimmiten olioita, joiden tila talletetaan tietokantaan. Tietokannan käsittely on yleensä abstrahoitu siten, että ohjelmakoodin tasolla on harvoin tarve kirjoittaa SQL-kieltä tai tietokannan konfiguraatioita. Detaljit hoituvat [Object Relational Mapping (ORM)](https://en.wikipedia.org/wiki/Object-relational_mapping) -kirjaston avulla. Railsissa käytettävä ORM on nimeltään ActiveRecord, joka toimii hieman eri tavalla kuin joillekin ehkä  Javamaailmasta tutut JPA-standardia noudattavat EclipseLink ja Hibernate.
 
-Railsin taustalla on vahvana periaatteena __convention over configuration__, mikä tarkoitaa tapaa, jolla Rails pyrkii minimoimaan konfiguraatioiden tekemisen tarpeen määrittelemällä joukon konventioita esim. tiedostojen nimennälle ja niiden sijainnille tiedostohierarkiassa. Tulemme pian näkemään mitä CoC-periaate tarkoittaa käytännössä sovellusohjelmoijan kannalta. Rails mahdollistaa toki konventiosta poikkeamisen, mutta siinä tapauksessa ohjelmoijan on jossain määrin konfiguroitava asioita käsin.
+Railsin taustalla on vahvana periaatteena __convention over configuration__, mikä tarkoittaa tapaa, jolla Rails pyrkii minimoimaan konfiguraatioiden tekemisen tarpeen määrittelemällä joukon konventioita esim. tiedostojen nimennälle ja niiden sijainnille tiedostohierarkiassa. Tulemme pian näkemään mitä CoC-periaate tarkoittaa käytännössä sovellusohjelmoijan kannalta. Rails mahdollistaa toki konventiosta poikkeamisen, mutta siinä tapauksessa ohjelmoijan on jossain määrin konfiguroitava asioita käsin.
 
 Railsilla sovellusten tekeminen edellyttää luonnollisesti jonkinasteista Rubyn hallintaa. Ruby on dynaamisesti tyypitetty tulkattu oliokieli joka mahdollistaa myös funktionaalisen ohjelmointityylin. Ruby-koodia ei siis käännetä ollenkaan, vaan tulkki suorittaa koodia komento komennolta. Koska kääntäjää ei ole, ilmenevät myös koodiin tehdyt syntaksivirheet vasta ajon aikana toisin kuin käännettävillä kielillä. Modernit kehitysympäristöt auttavat hiukan, tarjoten jonkin verran lennossa tapahtuvaa "syntaksitarkastusta", mutta kehitysympäristön tuki ei ole läheskään samaa luokkaa kuin esim. Javalla.
 
@@ -153,7 +153,7 @@ Huom: jos suoritat sovellusta virtuaalipalvelimella, tulee komento antaa muodoss
 
     rails s -b 0.0.0.0
 
-Huom2: saatat törmätä tässä vaiheessa virheeseen joka johtuu siitä että koneellasi ei ole javascript-suoritusympäristöä. Yksi tapa kiertää ongelma on listätä tiedostoon Gemfile seuraava rivi (tai riittää poistaa # tiedostossa jo valmiina olevan rivin edestä):
+Huom2: saatat törmätä tässä vaiheessa virheeseen joka johtuu siitä että koneellasi ei ole javascript-suoritusympäristöä. Yksi tapa kiertää ongelma on lisätä tiedostoon Gemfile seuraava rivi (tai riittää poistaa # tiedostossa jo valmiina olevan rivin edestä):
 
     gem 'therubyracer', platforms: :ruby
 
@@ -181,9 +181,9 @@ Aloitetaan sovelluksen rakentaminen. Päätetään aloittaa panimoista, eli:
 * tehdään toiminnallisuus, joka mahdollistaa uuden panimon lisäyksen
 * saamme myös kaupan päälle toiminnallisuuden panimon tietojen muuttamiseen ja panimon poistamiseen
 
-Railsissa konventiona on, että (melkein) jokaista tietokantaan talletettavaa 'asiaa' varten solvelluksessa on oma model-luokka, kontrolleri-luokka sekä joukko omia näytön muodostavia tiedostoja.
+Railsissa konventiona on, että (melkein) jokaista tietokantaan talletettavaa 'asiaa' varten sovelluksessa on oma model-luokka, kontrolleri-luokka sekä joukko omia näytön muodostavia tiedostoja.
 
-Luodaan kaikki nämä Railsin valmista scaffold-generaattoria käyttäen. Panimolla on nimi (merkkijono) ja perustusvuosi (kokonaisluku). Anetaan komentoriviltä (sovelluksen sisältävästä hakemistosta) seuraava komento:
+Luodaan kaikki nämä Railsin valmista scaffold-generaattoria käyttäen. Panimolla on nimi (merkkijono) ja perustusvuosi (kokonaisluku). Annetaan komentoriviltä (sovelluksen sisältävästä hakemistosta) seuraava komento:
 
     rails generate scaffold brewery name:string year:integer
 
@@ -203,7 +203,7 @@ Loimme koodin generaattorilla <code>rails g scaffold brewery name:string year:in
 
 Alussa saattaa olla hieman sekavaa milloin ja missä käytetään yksikkö- ja milloin monikkomuotoa, miten tiedostot on nimetty ja mikä niiden sijainti on. Pikkuhiljaa kuitenkin käytänteet juurtuvat selkärankaan ja alkavat vaikuttamaan loogisilta.
 
-Jos sovellus ei ole jo käynnissä, käynnistetään se uudelleen antamlla komentoriviltä komento <code>rails s</code>. Huom: sovelluksen uudelleenkäynnistys on Railsissa tarpeen melko harvoin. Esim. koodin muuttelu ja lisääminen ei aiheuta uudelleenkäynnistystarvetta.
+Jos sovellus ei ole jo käynnissä, käynnistetään se uudelleen antamalla komentoriviltä komento <code>rails s</code>. Huom: sovelluksen uudelleenkäynnistys on Railsissa tarpeen melko harvoin. Esim. koodin muuttelu ja lisääminen ei aiheuta uudelleenkäynnistystarvetta.
 
 Railsin konventioiden mukaan kaikkien oluiden lista näkyy osoitteessa breweries, eli mennään sivulle:
 
@@ -241,13 +241,13 @@ Kuten huomaamme, on railsin scaffoldingilla saatu jo melko paljon valmista toimi
 
     rails destroy scaffold brewery
 
-Jos olet suorittanut jo migraation ja huomaat että generaattorin luoma koodi onkin tuohottava, on **erittäin tärkeää** ensin perua migraatio komennolla
+Jos olet suorittanut jo migraation ja huomaat että generaattorin luoma koodi onkin tuhottava, on **erittäin tärkeää** ensin perua migraatio komennolla
 
     rake db:rollback
 
 ## Konsoli
 
-Rails-sovelluskehittäjän yksi tärkeimmistä työkaluista on Rails-konsoli. Konsoli on interatkiivinen komentotulkki, joka on yhteydessä myös sovelluksen tietokantaan.
+Rails-sovelluskehittäjän yksi tärkeimmistä työkaluista on Rails-konsoli. Konsoli on interaktiivinen komentotulkki, joka on yhteydessä myös sovelluksen tietokantaan.
 
 Avaa konsoli antamalla komentoriviltä (sovelluksen sisältävästä hakemistosta) komento
 
@@ -400,7 +400,7 @@ Seuraavassa muutamia esimerkkejä, kokeile kaikkia konsolista:
 
 Lisää Rubyn taulukosta ks. [https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/rubyn_perusteita.md#taulukko](https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/rubyn_perusteita.md#taulukko)
 
-Huomaa, että jätimme edellä kaikissa esimerkeissä metodikutsuista sulut pois. <code>Brewery.find 1</code> siis tarkoitaa samaa kuin <code>Brewery.find(1)</code>
+Huomaa, että jätimme edellä kaikissa esimerkeissä metodikutsuista sulut pois. <code>Brewery.find 1</code> siis tarkoittaa samaa kuin <code>Brewery.find(1)</code>
 
 ## Alaviiva
 
@@ -554,7 +554,7 @@ Myös olueeseen liittyvään panimoon pääsee käsiksi helposti kooditasolla:
 2.2.1 :058 >
 ```
 
-Eli <code>Beer</code>-luokkaan lisätty rivi <code>belongs_to :brewery</code> lisää oluille metodin <code>brewery</code>, joka palauttaa olueseen tietokannassa liitetyn panimo-olion.
+Eli <code>Beer</code>-luokkaan lisätty rivi <code>belongs_to :brewery</code> lisää oluille metodin <code>brewery</code>, joka palauttaa olueeseen tietokannassa liitetyn panimo-olion.
 
 ## Tietokannan alustus
 
@@ -832,7 +832,7 @@ Ennen metodin <code>show</code> suoritusta siis suoritetaan komento
 
     @brewery = Brewery.find(params[:id])
 
-joka viittaa muuttujaan ```params```, joka taas sisältää suorituksen alla olevaan HTTP-kutsuun liittyvät tiedot. Muuttuja <code>params</code> on tyypiltään assosiatiivinen taulukko eli hash. Erityisesti muttujan arvo avaimella <code>:id</code> eli ```params[:id]``` kertoo tässä tapauksessa tarkasteltavana olevan panimon id:n, eli sivun polun breweries/xx, kenoviivan jälkeisen osan.
+joka viittaa muuttujaan ```params```, joka taas sisältää suorituksen alla olevaan HTTP-kutsuun liittyvät tiedot. Muuttuja <code>params</code> on tyypiltään assosiatiivinen taulukko eli hash. Erityisesti muuttujan arvo avaimella <code>:id</code> eli ```params[:id]``` kertoo tässä tapauksessa tarkasteltavana olevan panimon id:n, eli sivun polun breweries/xx, kenoviivan jälkeisen osan.
 
 Panimo haetaan tietokannasta tutulla komennolla ```Brewery.find``` ja sijoitetaan muuttujaan ```@brewery```.
 Metodi <code>show</code> renderöi lopuksi näkymätemplaten ```show.html.erb```. Näkymätemplaten generointi tapahtuu jälleen automaattisesti Railsin konvention perusteella, eli panimokontrollerin metodin ```show``` suorituksen lopussa renderöidään näkymä views/breweries/show.html.erb ellei koodi määrää muuta.
@@ -930,7 +930,7 @@ ja niiden poistaminen onnistuu sitten each-iteraattorin avulla
 
     orvot_oluet.each{ |orpo| orpo.delete }
 
-koska jokaiselle iteroitavalla oliolle kutsutaan ainoastaan metodia, onnistuu edellinen myös seuraavalla, hieman erikoisen näköisellä syntakstilla:
+koska jokaiselle iteroitavalla oliolle kutsutaan ainoastaan metodia, onnistuu edellinen myös seuraavalla, hieman erikoisen näköisellä syntaksilla:
 
     orvot_oluet.each(&:delete)
 
@@ -1034,7 +1034,7 @@ Luo ssh-avain ja lisää se herokuun sivulla https://dashboard.heroku.com/accoun
 Asenna herokun komentoriviliittymän sisältävä Heroku Toolbelt sivun https://toolbelt.heroku.com/ ohjeiden mukaan.
 
 **Huom:** Heroku Toolbeltin asentaminen vaatii admin-oikeuksia ja näinollen asennus laitoksen koneille ei onnistu. Saat kuitenkin asennettua Herokun komentorivikäyttöliittymän laitoksen koneille seuraavasti (huom. ohjeen toimivuus kevään 2016 osalta varmistetaan vasta tiistaina 19.1.):
-* Poista pajan koneeen kotihakemistosta tiedosto .netrc
+* Poista pajan koneen kotihakemistosta tiedosto .netrc
 * luo fs-kotihakemistoon samanniminen tyhjä tiedosto. fs-kotihakemistosi on polulla `/home/tktl-csfs/fs/home/omakayttajatunnus` tai `/home/tktl-csfs/fs2/home/omakayttajatunnus`. Voit luoda tyhjän tiedoston esim. komennolla `touch .netrc`.
 * luo symbolinen linkki suorittamalla seuraava komento pajakoneen kotihakemistosta `ln -s /home/tktl-csfs/fs2/home/omakayttajatunnus/.netrc` . (fs tai fs2 riippuen kummasta hakemistosta kotihakemistosi löytyy)
 * Varmista että olet kotihakemistossasi komennolla `cd $HOME`
