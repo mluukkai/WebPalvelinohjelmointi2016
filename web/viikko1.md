@@ -203,7 +203,7 @@ Loimme koodin generaattorilla <code>rails g scaffold brewery name:string year:in
 
 Alussa saattaa olla hieman sekavaa milloin ja missä käytetään yksikkö- ja milloin monikkomuotoa, miten tiedostot on nimetty ja mikä niiden sijainti on. Pikkuhiljaa kuitenkin käytänteet juurtuvat selkärankaan ja alkavat vaikuttamaan loogisilta.
 
-Jos sovellus ei ole jo käynnissä, käynnistetään se uudelleen anatamlla komentoriviltä komento <code>rails s</code>. Huom: sovelluksen uudelleenkäynnistys on Railsissa tarpeen melko harvoin. Esim. koodin muuttelu ja lisääminen ei aiheuta uudelleenkäynnistystarvetta.
+Jos sovellus ei ole jo käynnissä, käynnistetään se uudelleen antamlla komentoriviltä komento <code>rails s</code>. Huom: sovelluksen uudelleenkäynnistys on Railsissa tarpeen melko harvoin. Esim. koodin muuttelu ja lisääminen ei aiheuta uudelleenkäynnistystarvetta.
 
 Railsin konventioiden mukaan kaikkien oluiden lista näkyy osoitteessa breweries, eli mennään sivulle:
 
