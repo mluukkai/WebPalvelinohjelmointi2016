@@ -1033,15 +1033,11 @@ Luo ssh-avain ja lisää se herokuun sivulla https://dashboard.heroku.com/accoun
 * ohje ssh-avaimen luomiseen http://www.cs.helsinki.fi/group/kuje/compfac/ssh_avain.html
 Asenna herokun komentoriviliittymän sisältävä Heroku Toolbelt sivun https://toolbelt.heroku.com/ ohjeiden mukaan.
 
-**Huom:** Heroku Toolbeltin asentaminen vaatii admin-oikeuksia ja näinollen asennus laitoksen koneille ei onnistu. Saat kuitenkin asennettua Herokun komentorivikäyttöliittymän laitoksen koneille seuraavasti (huom. ohjeen toimivuus kevään 2016 osalta varmistetaan vasta tiistaina 19.1.):
-* Poista pajan koneen kotihakemistosta tiedosto .netrc
-* luo fs-kotihakemistoon samanniminen tyhjä tiedosto. fs-kotihakemistosi on polulla `/home/tktl-csfs/fs/home/omakayttajatunnus` tai `/home/tktl-csfs/fs2/home/omakayttajatunnus`. Voit luoda tyhjän tiedoston esim. komennolla `touch .netrc`.
-* luo symbolinen linkki suorittamalla seuraava komento pajakoneen kotihakemistosta `ln -s /home/tktl-csfs/fs2/home/omakayttajatunnus/.netrc` . (fs tai fs2 riippuen kummasta hakemistosta kotihakemistosi löytyy)
-* Varmista että olet kotihakemistossasi komennolla `cd $HOME`
-* Lataa ja pura heroku client komennolla `wget -qO- https://s3.amazonaws.com/assets.heroku.com/heroku-client/heroku-client.tgz | tar xz`
-* Lisää heroku client PATH:iin komennolla `echo 'export PATH="$HOME/heroku-client/bin:$PATH"' >> ~/.bashrc`
-* Käynnistä terminaali uudelleen
-* Tarkista että heroku on asennettu oikein suorittamalla `heroku --version` jonka pitäisi tulostaa jotain `heroku-toolbelt/3.22.1 (x86_64-linux) ruby/2.2.0` tapaista.
+**Huom:** Heroku Toolbeltin asentaminen vaatii admin-oikeuksia ja näinollen asennus laitoksen koneille ei onnistu em. sivun ohjeiden mukaan. Saat kuitenkin asennettua Herokun komentorivikäyttöliittymän laitoksen koneille komennolla
+
+    gem install heroku
+    
+ja vastaamalla `y` kesken asennusprosessin esitettävään kysymykseen.
 
 Mene sitten sovelluksen juurihakemistoon, ja luo sovellusta varten heroku-instanssi komennolla <code>heroku create</code>:
 
