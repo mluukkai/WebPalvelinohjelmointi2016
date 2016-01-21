@@ -74,9 +74,11 @@ Railsilla sovellusten tekeminen edellyttää luonnollisesti jonkinasteista Rubyn
 > ## Tehtävä 2: Rubyn alkeet
 >
 > Tee/käy läpi seuraavat
-> * http://tryruby.org/levels/1/challenges/0
-> * http://www.ruby-lang.org/en/documentation/quickstart/
-> * https://github.com/HY-TKTL/ruby-materiaali/blob/master/Perusteet.md
+> * [http://tryruby.org/levels/1/challenges/0](http://tryruby.org/levels/1/challenges/0)
+> * [http://www.ruby-lang.org/en/documentation/quickstart/](http://www.ruby-lang.org/en/documentation/quickstart/)
+>
+> Jos aikaa ja intoa riittää, voit käydä läpi myös osoitteessa
+> [https://github.com/HY-TKTL/ruby-materiaali/blob/master/Perusteet.md](https://github.com/HY-TKTL/ruby-materiaali/blob/master/Perusteet.md) olevan materiaalin
 
 ## Kurssin suoritusmuoto
 
