@@ -269,7 +269,7 @@ Tarvitsemme siis tietokantataulun ja vastaavan model-olion.
 
 Railsissa muutokset tietokantaan, esim. uuden taulun lisääminen, kannattaa tehdä __aina__ migraatioiden avulla. Migraatiot ovat siis hakemistoon db/migrate sijoitettavia tiedostoja, joihin kirjoitetaan Rubyllä tietokantaa muokkaavat operaatiot. Tutustumme migraatioihin tarkemmin vasta myöhemmin ja käytämme modelin luomiseen nyt Railsin valmista _model-generaattoria_, joka luo model-olion lisäksi automaattisesti tarvittavan migraation.
 
-Reittauksella on kokonaislukuarvoinen code>score</code> sekä vierasavain, joka linkittää sen reitattuun olueeseen. Railsin konvention mukaan vierasavaimen nimen tulee olla <code>beer_id</code>.
+Reittauksella on kokonaislukuarvoinen <code>score</code> sekä vierasavain, joka linkittää sen reitattuun olueeseen. Railsin konvention mukaan vierasavaimen nimen tulee olla <code>beer_id</code>.
 
 Model ja tietokannan generoiva migraatio saadaan luotua antamalla komentoriviltä komento:
 
@@ -493,7 +493,7 @@ irb(main):033:0>
   end
 ```
 
-Panimon sisällä <code>code</code> siis on ActiveRecordin tietokantaan tallentama attribuutti, kun taas <code>@year</code> on olion instanssimuuttuja. Railsin modeleissa instanssimuutuujia ei juurikaan käytetä. Instanssimuuttujia käytetään Railsissa lähinnä tiedonvälitykseen kontrollereilta näkymille.
+Panimon sisällä <code>year</code> siis on ActiveRecordin tietokantaan tallentama attribuutti, kun taas <code>@year</code> on olion instanssimuuttuja. Railsin modeleissa instanssimuutuujia ei juurikaan käytetä. Instanssimuuttujia käytetään Railsissa lähinnä tiedonvälitykseen kontrollereilta näkymille.
 
 > ## Tehtävä 3
 >
