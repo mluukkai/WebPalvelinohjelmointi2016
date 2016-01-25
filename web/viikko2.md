@@ -1514,4 +1514,4 @@ Koska kyseessä on tuotannossa oleva ohjelma, tietokannan resetointi (<code>rake
 
 Commitoi kaikki tekemäsi muutokset ja pushaa koodi Githubiin. Deployaa myös uusin versio Herokuun.
 
-Tehtävät kirjataan palautetuksi osoitteeseen http://wadrorstats2016.herokuapp.com/courses/1 (kirjaaminen mahdollista maanantaista alkaen)
+Tehtävät kirjataan palautetuksi osoitteeseen http://wadrorstats2016.herokuapp.com/courses/1
