@@ -554,7 +554,7 @@ Eli kuten yllä näemme, ei pelkkä koodin uudelleenlataaminen vielä riitä, si
 
 > ## Tehtävä 4
 >
-> Lisää luokalle <code>Beer</code> metodi <code>average_rating</code>, joka laskee oluen ratingien keskiarvon. Lisää keskiarvo oluen sivulle __jos__ oluella on ratingeja
+> Lisää luokalle <code>Beer</code> metodi <code>average_rating</code>, joka laskee oluen ratingien keskiarvon. Lisää keskiarvo yksittäisen oluen sivulle __jos__ oluella on ratingeja
 >
 > Näkymätemplatessa voi tehdä tuotettavasta sisällöstä ehdollisen seuraavasti
 >
@@ -1514,4 +1514,4 @@ Koska kyseessä on tuotannossa oleva ohjelma, tietokannan resetointi (<code>rake
 
 Commitoi kaikki tekemäsi muutokset ja pushaa koodi Githubiin. Deployaa myös uusin versio Herokuun.
 
-Tehtävät kirjataan palautetuksi osoitteeseen http://wadrorstats2016.herokuapp.com/courses/1 (kirjaaminen mahdollista maanantaista alkaen)
+Tehtävät kirjataan palautetuksi osoitteeseen http://wadrorstats2016.herokuapp.com/courses/1
