@@ -88,7 +88,7 @@ Sivu sisältää siis dokumentin tyypin määrittelyn, käytettävät tyylitiedo
 
 Oluen sivun näkymätemplate siis sisältää ainoastaan body-elementin sisälle tulevan HTML-koodin.
 
-On tyypillistä, että sovelluksen kaikki sivut ovat body-elementin sisältöä lukuun ottamatta samat. Railissa saadaankin määriteltyä kaikille sivuille yhteiset osat sovelluksen _layoutiin_, eli tiedostoon app/views/layouts/application.html.erb. Oletusarvoisesti tiedoston sisältö on seuraavanlainen:
+On tyypillistä, että sovelluksen kaikki sivut ovat body-elementin sisältöä lukuun ottamatta samat. Railsissa saadaankin määriteltyä kaikille sivuille yhteiset osat sovelluksen _layoutiin_, eli tiedostoon app/views/layouts/application.html.erb. Oletusarvoisesti tiedoston sisältö on seuraavanlainen:
 
 ```erb
 <!DOCTYPE html>
@@ -159,7 +159,7 @@ Aloitetaan sillä, että tehdään panimoiden listasta sovelluksen oletusarvoine
 
 Nyt osoite http://localhost:3000/ ohjautuu kaikki panimot näyttävälle sivulle.
 
-Edellinen on oikeastaa hieman tyylikkäämpi tapa sanoa:
+Edellinen on oikeastaan hieman tyylikkäämpi tapa sanoa:
 
     get '/', to: 'breweries#index'
 
@@ -289,7 +289,7 @@ Jos olet suorittanut jo migraation ja huomaat että generaattorin luoma koodi on
 
     rake db:rollback
 
-Jotta yhteydet saadaan myös oliotasolle (muistutuksena [viime viikon materiaali](https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko1.md#oluet-ja-yhden-suhde-moneen--yhteys), tulee luokkia päivittää seuraavasti
+Jotta yhteydet saadaan myös oliotasolle (muistutuksena [viime viikon materiaali](https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko1.md#oluet-ja-yhden-suhde-moneen--yhteys)), tulee luokkia päivittää seuraavasti
 
 ```ruby
 class Beer < ActiveRecord::Base
@@ -331,7 +331,7 @@ Reittaukset siis lisätään ensimmäisenä kannasta löytyvälle oluelle. Huoma
 >
 >Kertaa tarvittaessa edellisen viikon [materiaalista](https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko1.md) konsolia käsittelevät osuudet.
 >
->palauta tämä tehtävä lisäämällä sovelluksellesi hakemisto exercises ja sinne tiedosto exercise1, joka sisältää copypasten konsolisessiosta
+>Palauta tämä tehtävä lisäämällä sovelluksellesi hakemisto exercises ja sinne tiedosto exercise1, joka sisältää copypasten konsolisessiosta
 
 Nyt tietokannassamme on reittauksia, ja haluamme saada ne listattua kaikkien reittausten sivulle.
 
@@ -590,7 +590,7 @@ Sivulla on pieni, mutta ikävä kielioppivirhe:
 
 > ## Tehtävä 6
 >
-> Tutustu Railsissa valmiina olevaan <code>pluralize</code>-apumetodiin http://apidock.com/rails/ActionView/Helpers/TextHelper/pluralize ja tee oluen sivusta metodin avulla kieliopillisesti oikeaoppinen (eli yhden reittauksien tapauksessa tulee tulostua 'beer has 1 rating')
+> Tutustu Railsissa valmiina olevaan <code>pluralize</code>-apumetodiin http://apidock.com/rails/ActionView/Helpers/TextHelper/pluralize ja tee oluen sivusta metodin avulla kieliopillisesti oikeaoppinen (eli yhden reittauksen tapauksessa tulee tulostua 'beer has 1 rating')
 
 ## Lomake ja post
 
@@ -765,7 +765,7 @@ Jos olisimme tehneet reittauksen luovan komennon muodossa
 
         Rating.create beer_id: params[:rating][:beer_id], score: params[:rating][:score]
 
-joka siis periaattessa tarkoittaa täysin samaa kuin ylläoleva muoto (sillä <code>params[:rating]</code> on sisällöltän __täysin sama__ hash kuin <code>beer_id:params[:rating][:beer_id], score:params[:rating][:score]</code>), ei virheilmoitusta olisi tullut. [Tietoturvasyistä](http://en.wikipedia.org/wiki/Mass_assignment_vulnerability) Rails ei kuitenkaan salli mielivaltaista <code>params</code>-muuttujasta tapahtuvaa "massasijoitusta" (engl. mass assignment eli kaikkien parametrien antamista hashina) olion luomisen yhteydessä.
+joka siis periaatteessa tarkoittaa täysin samaa kuin ylläoleva muoto (sillä <code>params[:rating]</code> on sisällöltään __täysin sama__ hash kuin <code>beer_id:params[:rating][:beer_id], score:params[:rating][:score]</code>), ei virheilmoitusta olisi tullut. [Tietoturvasyistä](http://en.wikipedia.org/wiki/Mass_assignment_vulnerability) Rails ei kuitenkaan salli mielivaltaista <code>params</code>-muuttujasta tapahtuvaa "massasijoitusta" (engl. mass assignment eli kaikkien parametrien antamista hashina) olion luomisen yhteydessä.
 
 Rails 4:stä lähtien kontrollerin on lueteltava eksplisiittisesti mitä hashin <code>params</code> sisällöstä voidaan massasijoittaa olioiden luonnin yhteydessä. Tähän kontrolleri käyttää <code>params</code>:in metodeja <code>require</code> ja <code>permit</code>.
 
@@ -845,7 +845,7 @@ Olisi ollut teknisesti mahdollista olla käyttämättä uudelleenohjausta ja ren
   end
 ```
 
-Vaikka aikaansaannos näyttää sivuston käyttäjälle täsmälleen samalta, tämä ei ole kuitenkaan järkevää muutamastakaan syystä. Ensinnäkin kaikki metodissa <code>index</code> oleva koodi, joka tarvitaan näkymän muodostamiseen on kopioitava <code>create</code>-metodiin (nyt kopioitavaa koodia ei ole paljon, mutta tilanne ei ole aina yhtä yksinkertainen). Toinen syy liittyy selaimen käyttäytymiseen. Jos kontorollerimme käyttäisi sivun renderöintiä ja selaimen käyttäjä refreshaisi sivun uuden oluen luomisen jälkeen, kävisi seuraavasti:
+Vaikka aikaansaannos näyttää sivuston käyttäjälle täsmälleen samalta, tämä ei ole kuitenkaan järkevää muutamastakaan syystä. Ensinnäkin kaikki metodissa <code>index</code> oleva koodi, joka tarvitaan näkymän muodostamiseen on kopioitava <code>create</code>-metodiin (nyt kopioitavaa koodia ei ole paljon, mutta tilanne ei ole aina yhtä yksinkertainen). Toinen syy liittyy selaimen käyttäytymiseen. Jos kontrollerimme käyttäisi sivun renderöintiä ja selaimen käyttäjä refreshaisi sivun uuden oluen luomisen jälkeen, kävisi seuraavasti:
 
 ![kuva](https://github.com/mluukkai/WebPalvelinohjelmointi2016/raw/master/images/ratebeer-w2-5.png)
 
