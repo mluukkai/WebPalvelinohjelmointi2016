@@ -314,11 +314,11 @@ Käynnistetään Rails-konsoli antamalla komentoriviltä komento <code>rails c</
 ```
 
 -Reittaukset siis lisätään ensimmäisenä kannasta löytyvälle oluelle. Huomaa luontitapa, saman asian olisi ajanut monimutkaisempi tapa		
- -		
- -```ruby		
- -    b.ratings << Rating.create(score:15)		
- -```		
- -
+ 	
+ ```ruby		
+     b.ratings << Rating.create(score:15)		
+ ```		
+ 
 
 >## Tehtävä 1
 >
