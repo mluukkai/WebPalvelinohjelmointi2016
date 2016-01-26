@@ -313,12 +313,11 @@ Käynnistetään Rails-konsoli antamalla komentoriviltä komento <code>rails c</
 2.2.1 :004 > b.ratings.create score:17
 ```
 
--Reittaukset siis lisätään ensimmäisenä kannasta löytyvälle oluelle. Huomaa luontitapa, saman asian olisi ajanut monimutkaisempi tapa		
+Reittaukset siis lisätään ensimmäisenä kannasta löytyvälle oluelle. Huomaa luontitapa, saman asian olisi ajanut monimutkaisempi tapa
  	
  ```ruby		
-     b.ratings << Rating.create(score:15)		
+b.ratings << Rating.create(score:15)		
  ```		
- 
 
 >## Tehtävä 1
 >
