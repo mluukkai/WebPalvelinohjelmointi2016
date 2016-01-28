@@ -1361,7 +1361,7 @@ end
 
 Varmistetaan jälleen selaimella muut sivut toimivat, mutta panimon poisto aiheuttaa virheen.
 
-Toteutetaan sitten http-basicauth-autentikointi (ks. tarvittaessa lisää esim. http://blog.dcxn.com/2011/09/30/the-simplest-possible-authentication-in-rails-http-auth-basic/)
+Toteutetaan sitten http-basicauth-autentikointi (ks. tarvittaessa lisää esim. [täältä](http://web.archive.org/web/20150312171118/http://blog.dcxn.com/2011/09/30/the-simplest-possible-authentication-in-rails-http-auth-basic))
 
 Kovakoodataan käyttäjätunnukseksi "admin" ja salasanaksi "secret":
 
