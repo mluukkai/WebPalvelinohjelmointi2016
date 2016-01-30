@@ -137,7 +137,7 @@ summataksemme reittaukset, tulee siis jokaisesta reittausoliosta ottaa sen kent�
 (byebug)
 ```
 
-Enumerable-modulin metodi <code>map</code> tarjoaa keninon muodostaa kokoelman perusteella uusi kokoelma, jonka alkiot saadaan alkuperäisen kokelman alkioista, suorittamalla jokaiselle alkiolle mäppäys-funktio.
+Enumerable-modulin metodi <code>map</code> tarjoaa keinon muodostaa kokoelman perusteella uusi kokoelma, jonka alkiot saadaan alkuperäisen kokelman alkioista, suorittamalla jokaiselle alkiolle mäppäys-funktio.
 
 Jos alkuperäisen kokoelman alkioon viitataan nimellä <code>r</code>, mäppäysfunktio on yksinkertainen:
 
@@ -164,7 +164,7 @@ mäppäysfunktio siis annetaan metodille <code>map</code> parametriksi aaltosulk
 (byebug)
 ```
 
-Metodin map avulla saamme siis muodostettua reittausten kokoelmasta taulukon reittauste arvoja. Seuraava tehtävä on summata nämä arvot.
+Metodin map avulla saamme siis muodostettua reittausten kokoelmasta taulukon reittausten arvoja. Seuraava tehtävä on summata nämä arvot.
 
 Rails on lisännyt kaikille Enumerableille metodin
 [sum](http://apidock.com/rails/Enumerable/sum), kokeillaan sitä mapilla aikansaamaamme taulukkoon.
@@ -191,7 +191,7 @@ ja muodostetaan sitten keskiarvon laskeva onelineri:
 (byebug)
 ```
 
-huomaamme että lopputulos pyöristy väärin. Kyse on tietenkin siitä että sekä jaettava että jakaja ovat kokonaislukuja. Muutetaan toinen näistä liukuluvuksi. Koeillaan ensin miten kokonaisluvusta liukuluvun tekevä metodi toimii:
+huomaamme että lopputulos pyöristyy väärin. Kyse on tietenkin siitä että sekä jaettava että jakaja ovat kokonaislukuja. Muutetaan toinen näistä liukuluvuksi. Kokeillaan ensin miten kokonaisluvusta liukuluvun tekevä metodi toimii:
 
 ```ruby
 (byebug) 1.to_f
@@ -201,7 +201,7 @@ huomaamme että lopputulos pyöristy väärin. Kyse on tietenkin siitä että se
 
 Jos et tiedä miten joku asia tehdään Rubyllä, google tietää.
 
-Mieti sopiva hakusana niin saat melko varmasti vastauksen. Kannattaa kuitenkin olla hiukan varovainen ja tutkia ainakin muutama googlen vastaus. Ainakin kannatta varmistaa että vastauksessa puhutaan riittävän tuoreesta rubyn tai railsin versiosta. Esim. Rails 2:ssa ja 3:ssa olevista asioista erittäin moni on muuttunut nelosversiossa.
+Mieti sopiva hakusana niin saat melko varmasti vastauksen. Kannattaa kuitenkin olla hiukan varovainen ja tutkia ainakin muutama googlen vastaus. Ainakin kannattaa varmistaa että vastauksessa puhutaan riittävän tuoreesta rubyn tai railsin versiosta. Esim. Rails 2:ssa ja 3:ssa olevista asioista erittäin moni on muuttunut nelosversiossa.
 
 Rybyssä ja Railsissa on useimmiten joku valmis metodi tai gemi melkein kaikkeen, eli pyörän uudelleenkeksimisen sijaan kannattaa aina googlata tai vilkuilla dokumentaatiota.
 
@@ -276,7 +276,7 @@ Evaluoidaan lausekkeen osat debuggerissa:
 (byebug)
 ```
 
-Olemme siis jakamassa kokonaislukunollaa lukuluvulla nolla, katsotaan mikä laskuoperaation tulos on:
+Olemme siis jakamassa kokonaisluku nollaa luvulla nolla, katsotaan mikä laskuoperaation tulos on:
 
 ```ruby
 (byebug) 0/0.0
@@ -330,7 +330,7 @@ HTTP on tilaton protokolla, eli kaikki HTTP-protokollalla suoritetut pyynnöt ov
 
 Lyhyesti sanottuna evästeiden toimintaperiaate on seuraava: kun selaimella mennään jollekin sivustolle, voi palvelin lähettää vastauksessa selaimelle pyynnön evästeen tallettamisesta. Jatkossa selain liittää evästeen kaikkiin sivustolle kohdistuneisiin HTTP-pyyntöihin. Eväste on käytännössä pieni määrä dataa, ja palvelin voi käyttää evästeessä olevaa dataa haluamallaan tavalla evästeen omaavan selaimen tunnistamiseen.
 
-Railsissa sovelluskehittäjän ei ole tarvetta työskennellä suoraan evästeiden kanssa, sillä Railsiin on toteutettu evästeiden avulla hieman korkeammalla abstratkiotasolla toimivat __sessiot__ ks.
+Railsissa sovelluskehittäjän ei ole tarvetta työskennellä suoraan evästeiden kanssa, sillä Railsiin on toteutettu evästeiden avulla hieman korkeammalla abstraktiotasolla toimivat __sessiot__ ks.
 http://guides.rubyonrails.org/action_controller_overview.html#session joiden avulla sovellus voi "muistaa" tiettyyn selaimeen liittyviä asioita, esim. käyttäjän identiteetin, useiden HTTP-pyyntöjen ajan.
 
 Kokeillaan ensin sessioiden käyttöä muistamaan käyttäjän viimeksi tekemä reittaus. Rails-sovelluksen koodissa HTTP-pyynnön tehneen käyttäjän (tai tarkemmin ottaen selaimen) sessioon pääsee käsiksi hashin kaltaisesti toimivan olion <code>session</code> kautta.
@@ -497,14 +497,14 @@ Voimme muotoilla ehdon myös tyylikkäämmin:
 
 Pelkkä <code>current_user</code> toimii ehtona, sillä arvo <code>nil</code> tulkitaan Rubyssä epätodeksi.
 
-Kirjautumisen osoite __sessions/new__ on hieman ikävä. Määritelläänkin kirjautumista varten luontevampi vaihtoehtoinen osoite __signin__. Määritellään myös reitti ulkoskirjautumiselle. Lisätään siis seuraavat routes.rb:hen:
+Kirjautumisen osoite __sessions/new__ on hieman ikävä. Määritelläänkin kirjautumista varten luontevampi vaihtoehtoinen osoite __signin__. Määritellään myös reitti uloskirjautumiselle. Lisätään siis seuraavat routes.rb:hen:
 
 ```ruby
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
 ```
 
-eli sisäänkirjautumislomake on nyt osoitteessa [http://localhost:3000/signin][/signin] ja ulkoskirjautuminen tapahtuu osoitteeseen _signout_ tehtävän _HTTP DELETE_ -pyynnön avulla.
+eli sisäänkirjautumislomake on nyt osoitteessa [http://localhost:3000/signin][/signin] ja uloskirjautuminen tapahtuu osoitteeseen _signout_ tehtävän _HTTP DELETE_ -pyynnön avulla.
 
 Olisi periaatteessa ollut mahdollista määritellä myös
 
@@ -522,7 +522,7 @@ eli mahdollistaa uloskirjautuminen HTTP GET:in avulla. Ei kuitenkaan pidetä hyv
 >
 > Muistutus: näen järjestelmään määritellyt routet ja polkuapumetodit komentoriviltä komennolla <code>rake routes</code> tai menemällä mihin tahansa sovelluksen osoitteeseen, jota ei ole olemassa, esim. [http://localhost:3000/wrong](http://localhost:3000/wrong)
 
-Tehtävän jälkeen sovelluksesi näyttää suunilleen seuraavalta jos käyttäjä on kirjautuneena:
+Tehtävän jälkeen sovelluksesi näyttää suunnilleen seuraavalta jos käyttäjä on kirjautuneena:
 
 ![kuva](https://github.com/mluukkai/WebPalvelinohjelmointi2016/raw/master/images/ratebeer-w3-1.png)
 
@@ -904,7 +904,7 @@ Jos yrität luoda oluen tyhjällä nimellä, seurauksena on virheilmoitus:
 
 ![kuva](https://github.com/mluukkai/WebPalvelinohjelmointi2016/raw/master/images/ratebeer-w3-5.png)
 
-Mistä tämä johtuu? Jos oluen luonti epäonnistuu validoinnissa tapahtuneen virheen takia, olutkontrollerin metodi <code>create</code> suorittaa else-haaran, eli renderöi uudelleen oluiden luomiseen käytettävän lomakkeen. Oluiden luomiseen käytettävä lomake käyttää muuttujiin <code>@styles</code> talletettua oluttyylien listaa lomakkeen generointiin. Virheilmoituksen syynä onkin se, että muuttujaa ei ole nyt alustettu (toisin kuin jos lomakeeseen mennään kontrollerimetodin <code>new</code> kautta). Lomake olettaa myös, että muuttujaan <code>@breweries</code> on tallettu kaikkien panimoiden lista. Eli ongelma korjautuu jos alustamme muuttujat else-haarassa:
+Mistä tämä johtuu? Jos oluen luonti epäonnistuu validoinnissa tapahtuneen virheen takia, olutkontrollerin metodi <code>create</code> suorittaa else-haaran, eli renderöi uudelleen oluiden luomiseen käytettävän lomakkeen. Oluiden luomiseen käytettävä lomake käyttää muuttujaan <code>@styles</code> talletettua oluttyylien listaa lomakkeen generointiin. Virheilmoituksen syynä onkin se, että muuttujaa ei ole nyt alustettu (toisin kuin jos lomakkeeseen mennään kontrollerimetodin <code>new</code> kautta). Lomake olettaa myös, että muuttujaan <code>@breweries</code> on talletettu kaikkien panimoiden lista. Eli ongelma korjautuu jos alustamme muuttujat else-haarassa:
 
 ``` ruby
   def create
@@ -1308,7 +1308,7 @@ Haluaisimme siis poistaa lomakkeesta seuraavat
 
 _jos_ käyttäjän tietoja ollaan editoimassa, eli käyttäjäolio on jo luotu aiemmin.
 
-Lomake voi kysyä oliolta <code>@user</code> onko se vielä tietokantaan tallentamaton metodin <code>new_record?</code> avulla. Näin saadaan <code>username</code>-kenttä näkyville lomakkeeseen ainoastaan sillon kuin kyseessä on uuden käyttäjän luominen:
+Lomake voi kysyä oliolta <code>@user</code> onko se vielä tietokantaan tallentamaton metodin <code>new_record?</code> avulla. Näin saadaan <code>username</code>-kenttä näkyville lomakkeeseen ainoastaan silloin kuin kyseessä on uuden käyttäjän luominen:
 
 ```erb
   <% if @user.new_record? %>
@@ -1360,7 +1360,7 @@ Kaikkien käyttäjien sivu aiheuttaa seuraavan virheen:
 
     ActionView::Template::Error (PG::UndefinedTable: ERROR:  relation "users" does not exist
 
-eli tietokantataulua *users* ei ole olemassa koska sovelluksen uusia migraatioita ei ole suoritettu herokussa. Ongelma korjaantuu suorittamalla migratiot:
+eli tietokantataulua *users* ei ole olemassa koska sovelluksen uusia migraatioita ei ole suoritettu herokussa. Ongelma korjaantuu suorittamalla migraatiot:
 
     heroku run rake db:migrate
 
