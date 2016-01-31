@@ -1412,5 +1412,3 @@ Useimmiten tuotannossa vastaan tulevat ongelmat johtuvat siitä, että tietokant
 Commitoi kaikki tekemäsi muutokset ja pushaa koodi Githubiin. Deployaa myös uusin versio Herokuun.
 
 Tehtävät kirjataan palautetuksi osoitteeseen [http://wadrorstats2016.herokuapp.com](http://wadrorstats2016.herokuapp.com)
-
-Tehtävien palautus onnistuu maanantaina
