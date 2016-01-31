@@ -374,7 +374,7 @@ Voidaan ajatella, että kirjautumisen yhteydessä syntyy sessio, ja tätä voida
 
 Sessio-resurssi kuitenkin poikkeaa esim. oluista siinä mielessä että tietyllä ajanhetkellä käyttäjä joko ei ole tai on kirjaantuneena. Sessioita ei siis ole yhden käyttäjän näkökulmasta oluiden tapaan useitavaan maksimissaan yksi. Kaikkien sessioiden listaa ei nyt reittien tasolla ole mielekästä olla ollenkaan olemassa kuten esim. oluiden tilanteessa on. Reitit kannattaakin kirjoittaa yksikössä ja tämä saadaan aikaan kun session retit luodaan routes.rb:hen komennolla <code>resource</code>:
 
-    resource :session, only: [:new, :create, :delete]
+    resource :session, only: [:new, :create, :destroy]
 
 **HUOM: varmista että kirjoitat määrittelyn routes.rb:hen juuri ylläkuvatulla tavalla, eli <code>resource</code>, ei _resources_ niinkuin muiden polkujen määrittelyt on tehty.**
 
