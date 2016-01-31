@@ -902,7 +902,7 @@ http://guides.rubyonrails.org/active_record_validations.html ja http://apidock.c
 
 Jos yrität luoda oluen tyhjällä nimellä, seurauksena on virheilmoitus:
 
-![kuva](https://github.com/mluukkai/WebPalvelinohjelmointi2016/raw/master/images/ratebeer-w3-5.png)
+![kuva](https://github.com/mluukkai/WebPalvelinohjelmointi2016/raw/master/images/ratebeer-w3-9.png)
 
 Mistä tämä johtuu? Jos oluen luonti epäonnistuu validoinnissa tapahtuneen virheen takia, olutkontrollerin metodi <code>create</code> suorittaa else-haaran, eli renderöi uudelleen oluiden luomiseen käytettävän lomakkeen. Oluiden luomiseen käytettävä lomake käyttää muuttujaan <code>@styles</code> talletettua oluttyylien listaa lomakkeen generointiin. Virheilmoituksen syynä onkin se, että muuttujaa ei ole nyt alustettu (toisin kuin jos lomakkeeseen mennään kontrollerimetodin <code>new</code> kautta). Lomake olettaa myös, että muuttujaan <code>@breweries</code> on talletettu kaikkien panimoiden lista. Eli ongelma korjautuu jos alustamme muuttujat else-haarassa:
 
