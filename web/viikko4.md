@@ -1289,7 +1289,7 @@ Lisätään vielä testi, joka tarkastaa, että panimoiden sivulta pääsee link
     click_link "Koff"
 
     expect(page).to have_content "Koff"
-    expect(page).to have_content "established in 1897"
+    expect(page).to have_content "Established at 1897"
   end
 ```
 
@@ -1332,7 +1332,7 @@ describe "Breweries page" do
       click_link "Koff"
 
       expect(page).to have_content "Koff"
-      expect(page).to have_content "established in 1897"
+      expect(page).to have_content "Established at 1897"
     end
 
   end
@@ -1462,10 +1462,10 @@ end
 Testi rakentaa käyttämänsä panimon, kaksi olutta ja käyttäjän metodin <code>let!</code> aiemmin käyttämämme metodin <code>let</code> sijaan. Näin toimitaan siksi että huutomerkitön versio ei suorita operaatiota välittömästi vaan vasta siinä vaiheessa kun koodi viittaa olioon eksplisiittisesti. Olioon <code>beer1</code> viitataan koodissa vasta lopun tarkastuksissa, eli jos olisimme luoneet sen metodilla <code>let</code> olisi reittauksen luomisvaiheessa tullut virhe, sillä olut ei olisi vielä ollut kannassa, eikä vastaavaa select-elementtiä olisi löytynyt.
 
 
-Testin <code>before</code>-lohkossa on koodi, jonka avulla käyttäjä kirjautuu järjestelmään. On todennäköistä, että samaa koodilohkoa tarvitaan useissa eri testitiedostoissa. Useassa eri paikassa tarvittava testikoodi kannattaa eristää omaksi apumetodikseen ja sijoittaa moduuliin, jonka kaikki sitä tarvitsevat testitiedostot voivat sisällyttää itseensä. Luodaan moduli tiedostoon /spec/support/helpers/own_test_helper.rb ja siirretään kirjautumisesta vastaava koodi sinne:
+Testin <code>before</code>-lohkossa on koodi, jonka avulla käyttäjä kirjautuu järjestelmään. On todennäköistä, että samaa koodilohkoa tarvitaan useissa eri testitiedostoissa. Useassa eri paikassa tarvittava testikoodi kannattaa eristää omaksi apumetodikseen ja sijoittaa moduuliin, jonka kaikki sitä tarvitsevat testitiedostot voivat sisällyttää itseensä. Luodaan moduli <code>Helper</code>hakemistoon _spec_ sijoitettavaan tiedostoon _helpers.rb_ ja siirretään kirjautumisesta vastaava koodi sinne:
 
 ```ruby
-module OwnTestHelper
+module Helpers
 
   def sign_in(credentials)
     visit signin_path
@@ -1478,12 +1478,16 @@ end
 
 Metodi <code>sign_in</code> saa siis käyttäjätunnus/salasanaparin parametrikseen hashina.
 
-Otetaan modulin määrittelemä metodi käyttöön testeissä:
+Lisätään tiedostoon *rails_helper.rb* heti muiden require-komentojen jälkeen rivi
+
+    require 'helpers'
+
+Voimme ottaa modulin määrittelemän metodi käyttöön testeissä komennolla <code>include Helper</code>:
 
 ```ruby
 require 'rails_helper'
 
-include OwnTestHelper
+include Helpers
 
 describe "Rating" do
   let!(:brewery) { FactoryGirl.create :brewery, name:"Koff" }
@@ -1501,7 +1505,7 @@ ja
 ```ruby
 require 'rails_helper'
 
-include OwnTestHelper
+include Helpers
 
 describe "User" do
   before :each do
@@ -1539,14 +1543,9 @@ end
 
 Kirjautumisen toteutuksen siirtäminen apumetodiin siis kasvattaa myös testien luettavuutta, ja jos kirjautumissivun toiminnallisuus myöhemmin muuttuu, on testien ylläpito helppoa, koska muutoksia ei tarvita kuin yhteen kohtaan.
 
-**Huom:** jos saat virheilmoituksen <code>uninitialized constant OwnTestHelper (NameError)</code> siirrä määrittely
-<code>include OwnTestHelper</code> tiedoston <code>rails_helper.rb</code> loppuun.
-
-**Huom2:** jos virheilmoitus ei vieläkään poistu, voit kopioida määritellyt apumetodit suoraan tiedoston <code>rails_helper.rb</code> loppuun.
-
 > ## Tehtävä 5
 >
-> Tee testi, joka varmistaa, että järjestelmään voidaan lisätä www-sivun kautta olut, jos oluen nimikenttä saa validin arvon (eli se on epätyhjä). Tee myös testi, joka varmistaa, että selain palaa oluen luomissivulle ja näyttää asiaan kuuluvan virheilmoituksen jos oluen nimi ei ole validi, ja että tälläisessä tapauksessa tietokantaan ei talletu mitään.
+> Tee testi, joka varmistaa, että järjestelmään voidaan lisätä www-sivun kautta olut, jos oluen nimikenttä saa validin arvon (eli se on epätyhjä). Tee myös testi, joka varmistaa, että selain näyttää asiaan kuuluvan virheilmoituksen jos oluen nimi ei ole validi, ja että tälläisessä tapauksessa tietokantaan ei talletu mitään.
 >
 > **HUOM:** ohjelmassasi on ehkä bugi tilanteessa, jossa yritetään luoda epävalidin nimen omaava olut. Kokeile toiminnallisuutta selaimesta. Syynä tälle on selitetty viikon alussa, kohdassa https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko4.md#muutama-huomio. Korjaa vika koodistasi.
 >
@@ -1557,7 +1556,7 @@ Kirjautumisen toteutuksen siirtäminen apumetodiin siis kasvattaa myös testien 
 >
 > Tee testi joka varmistaa, että tietokannassa olevat reittaukset ja niiden lukumäärä näytetään sivulla _ratings_. Jos lukumäärää ei toteutuksessani näytetä, korjaa puute.
 >
-> *Vihje**: voit tehdä testin esim. siten, että luot aluksi FactoryGirlillä reittauksia tietokantaan. Tämän jälkeen voit testata capybaralla sivun ratings sisältöä.
+> **Vihje**: voit tehdä testin esim. siten, että luot aluksi FactoryGirlillä reittauksia tietokantaan. Tämän jälkeen voit testata capybaralla sivun ratings sisältöä.
 >
 > Muista ongelmatilanteissa komento <code>save_and_open_page</code>!
 
@@ -1590,7 +1589,7 @@ Kirjoitetaan ensin "vanhahtavalla", nyt jo deprekoidulla <code>should</code>-syn
 ```ruby
 require 'rails_helper'
 
-describe Brewery do
+RSpec.describe Brewery, type: :model do
   it "has the name and year set correctly and is saved to database" do
     brewery = Brewery.create name:"Schlenkerla", year:1674
 
@@ -1709,7 +1708,7 @@ Gem otetaan käyttöön lisäämällä Gemfilen test -scopeen rivi
 
     gem 'simplecov', require: false
 
-**Huom** normaalin <code>bundle install</code>-komennon sijaan jouduin itse antamaan tässä vaiheessa komennon <code>bundle update</code>, jotta kaikista gemeistä saatiin asennetuiksi yhteensopivat versiot.
+**Huom** normaalin <code>bundle install</code>-komennon sijaan saatat joutua antamaan tässä vaiheessa komennon <code>bundle update</code>, jotta kaikista gemeistä saatiin asennetuiksi yhteensopivat versiot.
 
 Jotta simplecov saadaan käyttöön tulee tiedoston rails_helper.rb alkuun, **kahdeksi ensimmäiseksi riviksi** lisätä seuraavat:
 
@@ -1722,43 +1721,23 @@ Sitten ajetaan testit (ongelmatilanteessa ks. ylempi huomautus)
 
 ```ruby
 $ rspec spec
-.............................
+.....................................
 
-Finished in 1.29 seconds (files took 3.63 seconds to load)
-29 examples, 0 failures
-Coverage report generated for RSpec to /Users/mluukkai/kurssirepot/ratebeer/coverage. 146 / 201 LOC (72.64%) covered.
+Finished in 1.52 seconds (files took 1.93 seconds to load)
+37 examples, 0 failures
+
+Coverage report generated for RSpec to /Users/mluukkai/kurssirepot/ratebeer/coverage. 156 / 357 LOC (43.7%) covered.
 ```
 
-Testien rivikattavuus on siis 72.64 prosenttia. Tarkempi raportti on nähtävissä avaamalla selaimella tiedosto coverage/index.html. Kuten kuva paljastaa, on suuria osia ohjelmasta, erityisesti kontrollereista vielä erittäin huonosti testattu:
+Testien rivikattavuus on siis 43.7 prosenttia. Tarkempi raportti on nähtävissä avaamalla selaimella tiedosto coverage/index.html. Kuten kuva paljastaa, on suuria osia ohjelmasta, erityisesti kontrollereista vielä erittäin huonosti testattu:
 
 ![kuva](https://github.com/mluukkai/WebPalvelinohjelmointi2016/raw/master/images/ratebeer-w4-1.png)
-
-Kun katsomme raporttia tarkemmin, huomaamme, että joitain luokkia ei mainita raportissa ollenkaan! Esim. olutkerhokontrolleria tai modelia ei raportissa mainita. Simplecov jättääkin raportissaan kokonaan huomioimatta niiden luokkien koodin, joihin testit eivät koske ollenkan!
-
-Jos lisäämme mihin tahansa testiin seuraavat rivit:
-
-```ruby
-BeerClub
-BeerClubsController
-```
-
-tulee luokkien koodi ladatuksi testauksen aikana ja simplecov sisällyttää nämä raporttiinsa. Lukemat vaihtuvat hiukan:
-
-```ruby
-$ rspec spec
-.............................
-
-Finished in 1.3 seconds (files took 3.9 seconds to load)
-29 examples, 0 failures
-Coverage report generated for RSpec to /Users/mluukkai/kurssirepot/ratebeer/coverage. 158 / 234 LOC (67.52%) covered.
-```
 
 Suurikaan rivikattavuus ei tietysti vielä takaa että testit testaavat järkeviä asioita. Helposti mitattavana metriikkana se on kuitenkin parempi kuin ei mitään ja näyttää ainakin ilmeisimmät puutteet testeissä.
 
 > ## Tehtävä 10
 >
-> Ota simplecov käyttöön ohjelmassasi. Varmista, että kaikki oleellinen koodi (modelit ja kontrollerit sekä moduulit) huomioidaan raportissa!
-
+> Ota simplecov käyttöön ohjelmassasi. Tutki raportista (klikkaamalla punaisella tai keltaisella merkittyjä luokkia) mitä rivejä koodissasi on vielä täysin testaamatta.
 
 ## Jatkuva integraatio
 
@@ -1776,7 +1755,7 @@ Githubissa olevat Rails-projektit on helppo asettaa Travisin tarkkailtavaksi.
 >language: ruby
 >
 >rvm:
->  - 2.0.0
+>  - 2.3.0
 >
 >script:
 >  - bundle exec rake db:migrate --trace
@@ -1802,7 +1781,7 @@ Githubissa olevat Rails-projektit on helppo asettaa Travisin tarkkailtavaksi.
 
 ## Continuous delivery
 
-Jatkuvaa integraatiota vielä askeleen eteenpäin viety käytäntö on jatkuva toimittaminen eng. continuous delivery http://en.wikipedia.org/wiki/Continuous_delivery jonka yhtenä osatekijänä on jatkuva deployaus, eli idea, jonka mukaan koodi aina integroimisen yhteydessä myös deployataan tuotantoympäristön kaltaiseen ympäristöön tai parhaassa tapauksessa suoraan tuotantoon.
+Jatkuvaa integraatiota vielä askeleen eteenpäin viety käytäntö on jatkuva toimittaminen eng. continuous delivery http://en.wikipedia.org/wiki/Continuous_delivery jonka yhtenä osatekijänä on jatkuva deployaus, eli idea, jonka mukaan sovelluksen uusin versio aina integroimisen yhteydessä myös deployataan eli käynnistetään tuotantoympäristön kaltaiseen ympäristöön tai parhaassa tapauksessa suoraan tuotantoon.
 
 Eriyisesti Web-sovellusten yhteydessä jatkuva deployaaminen saattaa olla hyvinkin vaivaton operaatio.
 
