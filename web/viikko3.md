@@ -1379,7 +1379,7 @@ Reittausten sivun ongelma ei korjaantunut migraatioiden avulla ja syytä on etsi
 2016-01-24T19:19:58.672590+00:00 app[web.1]:     8:
 ```
 
-Syy on jälleen tuttu, eli näkymäkoodi yrittää kutsua metodia <code>usenrame</code> nil-arvoiselle oliolle. Syyn täytyy olla <code>link_to</code> metodissa oleva parametri
+Syy on jälleen tuttu, eli näkymäkoodi yrittää kutsua metodia <code>username</code> nil-arvoiselle oliolle. Syyn täytyy olla <code>link_to</code> metodissa oleva parametri
 
 ```ruby
     rating.user.username
