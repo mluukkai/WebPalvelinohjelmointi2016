@@ -39,7 +39,7 @@ end
 
 Voisimme toteuttaa keskiarvon laskemisen "javamaisesti" laskemalla summan käymällä reittauksen läpi alkio alkiolta ja jakamalla summan alkioden määrällä.
 
-Kaikki rubyn kokoelmamaiset asiat (mm. taulukko ja <code>hash_many</code>-kentä) sisältävät Enumerable-moduulin (ks. http://ruby-doc.org/core-2.1.0/Enumerable.html) tarjoamat apumetodit. Päätetäänkin hyödyntää apumetodeja keskiarvon laskemisessa.
+Kaikki rubyn kokoelmamaiset asiat (mm. taulukko ja <code>has_many</code>-kenttä) sisältävät Enumerable-moduulin (ks. http://ruby-doc.org/core-2.1.0/Enumerable.html) tarjoamat apumetodit. Päätetäänkin hyödyntää apumetodeja keskiarvon laskemisessa.
 
 Koodin kirjoittamisessa kannattaa _ehdottomasti_ hyödyntää konsolia. Oikeastaan konsoliakin parempi vaihtoehdo on debuggerin käyttö. Debuggerin avulla saadaan avattua konsoli suoraan siihen kontekstiin, johon koodia ollaan kirjoittamassa. Lisätään metodikutsuun debuggerin käynnistävä komento <code>byebug</code>:
 
