@@ -1923,5 +1923,3 @@ nämä muutokset eivät ole välttämättömiä ja tulevat viikotkaan eivät muu
 Commitoi kaikki tekemäsi muutokset ja pushaa koodi Githubiin. Deployaa myös uusin versio Herokuun.
 
 Tehtävät kirjataan palautetuksi osoitteeseen http://wadrorstats2016.herokuapp.com/
-
-Tehtävien palauttaminen onnistuu maanantaina.
