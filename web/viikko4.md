@@ -25,7 +25,7 @@ Viikolla 2 muutimme oluiden luomislomaketta siten, että uuden oluen tyyli ja pa
   </div>
 ```
 
-eli pudotusvalikkojen valintavaihtoehdot välitettään lomakkeelle muuttujissa <code>@styles</code> ja <code>@breweries</code>, joille kontrollerin metodi <code>new</code> asettaa arvot:
+eli pudotusvalikkojen valintavaihtoehdot välitetään lomakkeelle muuttujissa <code>@styles</code> ja <code>@breweries</code>, joille kontrollerin metodi <code>new</code> asettaa arvot:
 
 ```ruby
   def new
@@ -39,7 +39,7 @@ Näiden muutosten jälkeen oluen tietojen editointi ei yllättäen enää toimi.
 
 ![kuva](https://github.com/mluukkai/WebPalvelinohjelmointi2016/raw/master/images/ratebeer-w4-0.png)
 
-Syynä tälle on se, että uuden oluen luominen ja oluen tietojen editointi käyttävät molemmat samaa lomakkeen generoivaa näkymäätemplatea (app/views/beers/_form.html.erb) ja muutosten jälkeen näkymän toiminta edellyttää, että muuttuja <code>@breweries</code> sisältää panimoiden listan ja muuttuja <code>@styles</code> sisältää oluiden tyylit. Oluen tietojen muutossivulle mennään kontrollerimetodin <code>edit</code> suorituksen jälkeen, ja joudummekin muuttamaan kontrolleria seuraavasti korjataksemme virheen:
+Syynä tälle on se, että uuden oluen luominen ja oluen tietojen editointi käyttävät molemmat samaa lomakkeen generoivaa näkymätemplatea (app/views/beers/_form.html.erb) ja muutosten jälkeen näkymän toiminta edellyttää, että muuttuja <code>@breweries</code> sisältää panimoiden listan ja muuttuja <code>@styles</code> sisältää oluiden tyylit. Oluen tietojen muutossivulle mennään kontrollerimetodin <code>edit</code> suorituksen jälkeen, ja joudummekin muuttamaan kontrolleria seuraavasti korjataksemme virheen:
 
 ```ruby
   def edit
@@ -102,7 +102,7 @@ tällöin muuttujien <code>@styles</code> ja <code>@breweries</code> arvot asett
 
 ### Ongelmia Herokun kanssa
 
-Moni kurssin osallistujista on törmännyt siihen, tää paikallisesti loistavasti toimiva sovellus on aiheuttanut Herokussa pahaenteisen virheilmoituksen _We're sorry, but something went wrong_.
+Moni kurssin osallistujista on törmännyt siihen, että paikallisesti loistavasti toimiva sovellus on aiheuttanut Herokussa pahaenteisen virheilmoituksen _We're sorry, but something went wrong_.
 
 Heti ensimmäisenä kannattaa tarkistaa, että paikalliselta koneelta kaikki koodi on lisätty versionhallintaan, eli <code>git status</code>
 
@@ -227,7 +227,7 @@ Tarkka silmä huomaa lokin seasta että ongelma on _ActionView::Template::Error 
 
 vaikuttaa siis siltä, että tietokannassa on <code>rating</code>-olio, johon liittyvä <code>user</code> on <code>nil</code>. Kyseessä on siis jo [viikolta 2 tuttu](https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko2.md#ongelmia-herokussa) ongelma.
 
-Ongelman perimmäinen syy on joko se, että jonkin ratingin <code>user_id</code>-kentän arvo on <code>nil</code>, tai että jonkin rating-olion <code>user_id</code>:n arvona on virheellinen id. Tilanteesta selvitään esim. tuohoamalla 'huonot' rating-oliot komennolla <code>heroku run console</code> käynnistyvän Herokun konsolin avulla:
+Ongelman perimmäinen syy on joko se, että jonkin ratingin <code>user_id</code>-kentän arvo on <code>nil</code>, tai että jonkin rating-olion <code>user_id</code>:n arvona on virheellinen id. Tilanteesta selvitään esim. tuhoamalla 'huonot' rating-oliot komennolla <code>heroku run console</code> käynnistyvän Herokun konsolin avulla:
 
 
 ```ruby
@@ -254,7 +254,7 @@ Silloin tällöin (esim. jos luodaan vahingossa huono scaffold, ks. seuraava koh
 
 Jos haluat poistaa scaffold-generaattorin luomat tiedostot, onnistuu tämä komennolla
 
-    rails destroy scaffold resursin_nimi
+    rails destroy scaffold resurssin_nimi
 
 missä _resurssin_nimi_ on scaffoldilla luomasi resurssin nimi. **HUOM:** jos suoritit jo huonoon scaffoldiin liittyvän migraation, tee ehdottomasti ennen scaffoldin tuhoamista <code>rake db:rollback</code>
 
@@ -464,7 +464,7 @@ on kyllä ymmärrettävä, mutta kiitos rspec-magian, voimme ilmaista sen myös 
 
 Tämän muodon toiminta perustuu sille, että oliolla <code>user</code> on totuusarvoinen metodi <code>valid?</code>.
 
-Huomaamme, että käytämme testeissä kahta samuuden tarkastustapaa <code>be(false)</code> ja <code>eq(0)</code>, mikä näillä on erona? Matcherin eli 'tarkastimen' <code>be</code> avulla voidaan varmistaa, että kyse on kahdesta samasta oliosta. Totuusarvojen vertaulussa <code>be</code> onkin toimiva tarkistin. Esim. merkkijonojen vertailuun se ei toimi, kokeile muuttaa ensimmäisen testin vertailu muotoon:
+Huomaamme, että käytämme testeissä kahta samuuden tarkastustapaa <code>be(false)</code> ja <code>eq(0)</code>, mikä näillä on erona? Matcherin eli 'tarkastimen' <code>be</code> avulla voidaan varmistaa, että kyse on kahdesta samasta oliosta. Totuusarvojen vertailussa <code>be</code> onkin toimiva tarkistin. Esim. merkkijonojen vertailuun se ei toimi, kokeile muuttaa ensimmäisen testin vertailu muotoon:
 
 ```ruby
   expect(user.username).to be("Pekka")
@@ -558,7 +558,7 @@ RSpec.describe User, type: :model do
 end
 ```
 
-Siitä huolimatta, että muuttujan alustus on nyt vain yhdessä paikassa koodia, suoritetaan alustus uudelleen ennen jokaista metodia. Huom: metodi <code>let</code> suorittaa olion alustuksen vasta kun olioa tarvitaan oikeasti, tästä saatta joissain tilanteissa olla yllättäviä seurauksia!
+Siitä huolimatta, että muuttujan alustus on nyt vain yhdessä paikassa koodia, suoritetaan alustus uudelleen ennen jokaista metodia. Huom: metodi <code>let</code> suorittaa olion alustuksen vasta kun olioa tarvitaan oikeasti, tästä saattaa joissain tilanteissa olla yllättäviä seurauksia!
 
 Erityisesti vanhemmissa Rspec-testeissä näkee tyyliä, jossa testeille yhteinen alustus tapahtuu <code>before :each</code> -lohkon avulla. Tällöin testien yhteiset muuttujat on määriteltävä instanssimuuttujiksi, eli tyyliin <code>@user</code>.
 
@@ -784,7 +784,7 @@ Voimme nyt luoda testissä FactoryGirlin avulla oluen (johon automaattisesti lii
 
 Alussa siis luodaan olut, sen jälkeen reittaus. Reittauksen <code>create</code>-metodille annetaan parametreiksi olut- ja käyttäjäoliot (joista molemmat on luotu FactoryGirlillä), joihin reittaus liitetään.
 
-Luotu reittaus siis liittyy käyttäjään ja on käyttäjän ainoa reittaus. Testi siis lopulta odottaa, että reittaukseen liittyvä olut on käyttäjän lemipiolut:
+Luotu reittaus siis liittyy käyttäjään ja on käyttäjän ainoa reittaus. Testi siis lopulta odottaa, että reittaukseen liittyvä olut on käyttäjän lempiolut:
 
 ```ruby
     it "is the only rated if only one rating" do
@@ -825,7 +825,7 @@ Tehdään vielä testi, joka pakottaa meidät kunnollisen toteutuksen tekemiseen
     end
 ```
 
-Ensin luodan kolme olutta ja sen jälkeen oluisiin sekä user-olioon liittyvät reittaukset. Ensimmäinen reittaus saa reittauksiin määritellyn oletuspisteytyksen eli 10 pistettä. Toiseen ja kolmanteen reittaukseen score annetaan parametrina.
+Ensin luodaan kolme olutta ja sen jälkeen oluisiin sekä user-olioon liittyvät reittaukset. Ensimmäinen reittaus saa reittauksiin määritellyn oletuspisteytyksen eli 10 pistettä. Toiseen ja kolmanteen reittaukseen score annetaan parametrina.
 
 Testi ei luonnollisesti mene vielä läpi, sillä metodin <code>favorite_beer</code> toteutus jätettiin aiemmin puutteelliseksi.
 
@@ -1186,7 +1186,7 @@ Toivottavasti olet jo tässä vaiheessa kurssia rutinoitunut [byebugin](https://
 >
 > Tee seuraavaksi TDD-tyylillä <code>User</code>-olioille metodi <code>favorite_style</code>, joka palauttaa tyylin, jonka oluet ovat saaneet käyttäjältä keskimäärin korkeimman reittauksen. Lisää käyttäjän sivulle tieto käyttäjän mielityylistä.
 >
-> Älä tee kaikkea yhteen metodiin (ellet ratkaise tehtävää tietokantatasolla ActiveRecordilla mikä sekin on mahdolista!), vaan määrittele sopivia apumetodeja! Jos huomaat metodisi olevan yli 5 riviä pitkä, teet asioita todennäköisesti joko liikaa tai liian kankeasti, joten refaktoroi koodiasi. Rubyn kokoelmissa on paljon tehtävään hyödyllisiä apumetodeja, ks. http://ruby-doc.org/core-2.2.0/Enumerable.html
+> Älä tee kaikkea yhteen metodiin (ellet ratkaise tehtävää tietokantatasolla ActiveRecordilla mikä sekin on mahdollista!), vaan määrittele sopivia apumetodeja! Jos huomaat metodisi olevan yli 5 riviä pitkä, teet asioita todennäköisesti joko liikaa tai liian kankeasti, joten refaktoroi koodiasi. Rubyn kokoelmissa on paljon tehtävään hyödyllisiä apumetodeja, ks. http://ruby-doc.org/core-2.2.0/Enumerable.html
 
 > ## Tehtävä 4
 >
