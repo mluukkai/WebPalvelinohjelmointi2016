@@ -435,8 +435,6 @@ Kuten aina Rubyssä, on myös Rspecissä useita vaihtoehtoisia tapoja tehdä sam
 Rspecin versiosta 3 alkaen vanhempi should-syntaksi on deprekoitu, eli sitä ei tulisi enää käyttää.
 Shouldin muuttaminen expectiksi poisti myös <code>Deprecation Warning</code>in
 
-Käytämme jatkossa sekaisin molempia tyylejä, mutta pääasiassa expectiä.
-
 Äskeisessä testissä käytettiin komentoa <code>new</code>, joten olioa ei talletettu tietokantaan. Kokeillaan nyt olion tallettamista. Olemme määritelleet, että User-olioilla tulee olla salasana, jonka pituus on vähintään 4 ja että salasana sisältää sekä numeron että ison kirjaimen. Eli jos salasanaa ei aseteta, ei oliota tulisi tallettaa tietokantaan. Testataan että näin tapahtuu:
 
 ```ruby
@@ -938,7 +936,7 @@ RSpec.describe User, type: :model do
     let(:user){FactoryGirl.create(:user) }
 
     it "has method for determining one" do
-      user.should respond_to :favorite_beer
+      expect(user).to respond_to(:favorite_beer)
     end
 
     it "without ratings does not have one" do
