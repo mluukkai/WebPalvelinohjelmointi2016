@@ -350,7 +350,7 @@ Finished in 0.00047 seconds (files took 1.48 seconds to load)
 1 example, 0 failures, 1 pending
 ```
 
-*Huom* jos testi toimii muuten mutta saat testien ajamisen yhteydessä suuren määrän epämääräisiä virheilmoituksia , lisää tiedostoon _spec/spec_hepler.rb_ seuraava rivi
+*Huom* jos testi toimii muuten mutta saat testien ajamisen yhteydessä suuren määrän epämääräisiä virheilmoituksia , lisää tiedostoon _spec/spec_helper.rb_ seuraava rivi
 
 ```ruby
   config.warnings = false
