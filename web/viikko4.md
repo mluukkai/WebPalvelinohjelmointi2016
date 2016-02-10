@@ -420,7 +420,7 @@ Finished in 0.00553 seconds (files took 2.11 seconds to load)
 $
 ```
 
-Testin suorituksta seuraa myös varoitus vanhahtavan syntaksin käytöstä. Unohdetaan varoitus hetkeksi ja tarkastellaan testin sisältöä.
+Testin suorituksesta seuraa myös varoitus vanhahtavan syntaksin käytöstä. Unohdetaan varoitus hetkeksi ja tarkastellaan testin sisältöä.
 
 Toisin kuin xUnit-perheen testauskehyksissä, Rspecin yhteydessä ei käytetä assert-komentoja testin odotetun tuloksen määrittelemiseen. Käytössä on hieman erikoisemman näköinen syntaksi, kuten testin viimeisellä rivillä oleva:
 
