@@ -458,8 +458,6 @@ Syynä tälle on se, että testiympäristössä ei ole suoritettu kaikkia tietok
 > Laajenna testiä kattamaan seuraavat tapaukset:
 > * jos API palauttaa useita olutpaikkoja, kaikki näistä näytetään sivulla
 > * jos API ei löydä paikkakunnalta yhtään olutpaikkaa (eli paluuarvo on tyhjä taulukko), sivulla näytetään ilmoitus "No locations in _etsitty paikka_"
->
-> Ilmoitus löytymättömistä olutpaikoista kannattaa toteuttaa _noticeilla_, ks. https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko3.md#kirjautumisen-hienos%C3%A4%C3%A4t%C3%B6%C3%A4
 
 Siirrytään sitten luokan <code>BeermappingApi</code> testaamiseen. Luokka siis tekee HTTP GET -pyynnön HTTParty-kirjaston avulla Beermapping-palveluun. Voisimme edellisen esimerkin tapaan stubata HTTPartyn get-metodin. Tämän on kuitenkin hieman ikävää, sillä metodi palauttaa <code>HTTPartyResponse</code>-olion ja sellaisen muodostaminen stubauksen yhteydessä käsin ei välttämättä ole kovin mukavaa.
 
