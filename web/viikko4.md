@@ -350,7 +350,7 @@ Finished in 0.00047 seconds (files took 1.48 seconds to load)
 1 example, 0 failures, 1 pending
 ```
 
-*Huom* jos testi toimii muuten mutta saat testien ajamisen yhteydessä suuren määrän epämääräisiä virheilmoituksia , lisää tiedostoon _spec/spec_hepler.rb_ seuraava rivi
+*Huom* jos testi toimii muuten mutta saat testien ajamisen yhteydessä suuren määrän epämääräisiä virheilmoituksia , lisää tiedostoon _spec/spec_helper.rb_ seuraava rivi
 
 ```ruby
   config.warnings = false
@@ -420,7 +420,7 @@ Finished in 0.00553 seconds (files took 2.11 seconds to load)
 $
 ```
 
-Testin suorituksta seuraa myös varoitus vanhahtavan syntaksin käytöstä. Unohdetaan varoitus hetkeksi ja tarkastellaan testin sisältöä.
+Testin suorituksesta seuraa myös varoitus vanhahtavan syntaksin käytöstä. Unohdetaan varoitus hetkeksi ja tarkastellaan testin sisältöä.
 
 Toisin kuin xUnit-perheen testauskehyksissä, Rspecin yhteydessä ei käytetä assert-komentoja testin odotetun tuloksen määrittelemiseen. Käytössä on hieman erikoisemman näköinen syntaksi, kuten testin viimeisellä rivillä oleva:
 
@@ -434,8 +434,6 @@ Kuten aina Rubyssä, on myös Rspecissä useita vaihtoehtoisia tapoja tehdä sam
 
 Rspecin versiosta 3 alkaen vanhempi should-syntaksi on deprekoitu, eli sitä ei tulisi enää käyttää.
 Shouldin muuttaminen expectiksi poisti myös <code>Deprecation Warning</code>in
-
-Käytämme jatkossa sekaisin molempia tyylejä, mutta pääasiassa expectiä.
 
 Äskeisessä testissä käytettiin komentoa <code>new</code>, joten olioa ei talletettu tietokantaan. Kokeillaan nyt olion tallettamista. Olemme määritelleet, että User-olioilla tulee olla salasana, jonka pituus on vähintään 4 ja että salasana sisältää sekä numeron että ison kirjaimen. Eli jos salasanaa ei aseteta, ei oliota tulisi tallettaa tietokantaan. Testataan että näin tapahtuu:
 
@@ -938,7 +936,7 @@ RSpec.describe User, type: :model do
     let(:user){FactoryGirl.create(:user) }
 
     it "has method for determining one" do
-      user.should respond_to :favorite_beer
+      expect(user).to respond_to(:favorite_beer)
     end
 
     it "without ratings does not have one" do
@@ -1882,7 +1880,7 @@ Määritellään luokkaan <code>ApplicationController</code>  seuraava metodi:
 
 Eli jos metodia kutsuttaessa käyttäjä ei ole kirjautunut, suoritetaan uudelleenohjaus kirjautumissivulle. Koska metodi on sijoitettu luokkaan <code>ApplicationController</code> jonka kaikki kontrollerit perivät, on se kaikkien kontrollereiden käytössä.
 
-Lisätään metodi esifiltteriksi (ks. http://guides.rubyonrails.org/action_controller_overview.html#filters ja https://github.com/mluukkai/WebPalvelinohjelmointi2016/wiki/viikko-2#yksinkertainen-suojaus) olut- ja panimo- ja olutkerhokontrollerille kaikille metodeille paitsi index:ille ja show:lle:
+Lisätään metodi esifiltteriksi (ks. http://guides.rubyonrails.org/action_controller_overview.html#filters ja https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko2.md#yksinkertainen-suojaus) olut- ja panimo- ja olutkerhokontrollerille kaikille metodeille paitsi index:ille ja show:lle:
 
 ```ruby
 class BeersController < ApplicationController
