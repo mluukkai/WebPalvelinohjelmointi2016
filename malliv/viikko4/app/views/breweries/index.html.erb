@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p> Number of breweries: <%= @breweries.count %> </p>
+
+<h1>Listing Breweries</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Year</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @breweries.each do |brewery| %>
+      <tr>
+        <td><%= link_to brewery.name, brewery %></td>
+        <td><%= brewery.year %></td>
+        <% if current_user %>
+          <td><%= link_to 'Edit', edit_brewery_path(brewery) %></td>
+          <td><%= link_to 'Destroy', brewery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Brewery', new_brewery_path %>
+<br>
+<%= link_to 'list of beers', beers_path %>
