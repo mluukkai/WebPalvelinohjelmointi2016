@@ -648,7 +648,7 @@ http://guides.rubyonrails.org/routing.html#adding-more-restful-actions
 > irb(main):005:0> u.update_attribute(:admin, true)
 > ```
 >
-> Validointien suorittamisen voi ohittaa myös tallentamalla olion komennolla <code>u.save(validate: false)</body>
+> Validointien suorittamisen voi ohittaa myös tallentamalla olion komennolla <code>u.save(validate: false)</code>
 >
 > **HUOM:** toteutuksessa kannattanee hyödyntää [esifiltteriä](https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko4.md#kirjautuneiden-toiminnot)
 
