@@ -729,7 +729,7 @@ Lisätietoa http://www.railsdispatch.com/posts/security ja http://railscasts.com
 
 ## Metaohjelmointia: mielipanimoiden ja tyylin refaktorointi
 
-Viikon 4 tehtävissä 3 ja 4 (ks. https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko4.md#teht%C3%A4v%C3%A4-3) toteutettiin metodit henkilön suosikkipanimon ja oluttyylin selvittämiseen. Seuraavassa on eräs suoraviivainen ratkaisu metodien <code>favorite_style</code> ja <code>favorite_brewery</code> toteuttamiseen:
+Viikon 4 [tehtävissä 3 ja 4](ks. https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko4.md#teht%C3%A4v%C3%A4-3)  toteutettiin metodit henkilön suosikkipanimon ja oluttyylin selvittämiseen. Seuraavassa on eräs melko suoraviivainen ratkaisu metodien <code>favorite_style</code> ja <code>favorite_brewery</code> toteuttamiseen:
 
 ```ruby
 class User
@@ -772,17 +772,21 @@ Tutkitaan mielipanimon selvittävää metodia:
   end
 ```
 
-Erikostapauksen (ei yhtään reittausta) tarkamisen jälkeen metodi aloittaa selvittämällä minkä panimoiden oluita käyttäjä on reitannut:
+Erikoistapauksen (ei yhtään reittausta) tarkastamisen jälkeen metodi  selvittää minkä panimoiden oluita käyttäjä on reitannut:
 
 ```ruby
   rated = ratings.map{ |r| r.beer.brewery }.uniq
 ```
 
-Komento siis palauttaa listan käyttäjän tekemiin reittauksiin liittyvistä panimoista siten. Komennon <code>uniq</code> ansiosta sama panimo ei esiinny listalla kuin kerran.
+Komento siis palauttaa listan käyttäjän tekemiin reittauksiin liittyvistä panimoista, komennon <code>uniq</code> ansiosta sama panimo ei esiinny listalla kuin kerran (jos et tiedä miten komento map toimii, googlaa).
 
-Toinen komento järjestää reitattujen panimoiden listan käyttäen järjestämiskriteerinä panimon saamien reittausten keskiarvoa ja palauttaa listan ensimmäisen, eli parhaan keskiarvoreittauksen saaneen panimon.
+Tämän jälkeen metodi järjestää reitattujen panimoiden listan käyttäen järjestämiskriteerinä panimon saamien reittausten keskiarvoa ja palauttaa listan ensimmäisen, eli parhaan keskiarvoreittauksen saaneen panimon.
 
-Keskiarvo lasketaan apumetodilla:
+```ruby
+  rated.sort_by { |brewery| -rating_of_brewery(brewery) }.first
+```
+
+Kunkin panimon reittausten keskiarvo lasketaan apumetodilla:
 
 ```ruby
   def rating_of_brewery(brewery)
@@ -793,10 +797,10 @@ Keskiarvo lasketaan apumetodilla:
 
 Apumetodi valitsee aluksi käyttäjän tekemistä reittauksista ne, jotka koskevat parametriksi annettua panimoa. Tämän jälkeen lasketaan valittujen reittausten pistemäärien keskiarvo.
 
-Huomaamme, että <code>favorite_style</code> toimii _täsmälleen_ saman periaatteen mukaan ja metodi itse sekä sen käyttämät apumetodit ovatkin oikeastaan copypastea mielipanimon selvittämiseen käytettävästä koodista.
+Huomaamme, että <code>favorite_style</code> toimii _täsmälleen_ saman periaatteen mukaan ja metodi itse sekä sen käyttämä apumetodi ovatkin oikeastaan copypastea mielipanimon selvittämiseen käytettävästä koodista.
 
 
-Koska ohjelmistossamme on kattavat testit, on copypaste helppo refaktoroida pois. Tutkitaan ensin apumetodeja jotka laskevat yhden panimon ja yhden tyylin reittausten keskiarvon:
+Koska ohjelmistossamme on kattavat testit, on copypaste helppo refaktoroida pois. Tutkitaan ensin apumetodeja, jotka laskevat yhden panimon ja yhden tyylin reittausten keskiarvon:
 
 ```ruby
   def rating_of_style(style)
@@ -881,7 +885,7 @@ Nimetään uudelleen metodien komennossa <code>sort_by</code> käyttämä apumuu
   end
 ```
 
-Muutetaan <code>map</code> käytettävä metodikutsu muotoon <code>send</code>
+Muutetaan <code>map</code>:issa käytettävä metodikutsu muotoon <code>send</code>
 
 ```ruby
   def favorite_style
@@ -903,23 +907,23 @@ Määritellään parametrina oleva metodin nimi muuttujan <code>category</code> 
 
 ```ruby
   def favorite_style
-    return nil if ratings.empty?
     category = :style
+    return nil if ratings.empty?
 
     rated = ratings.map{ |r| r.beer.send(category) }.uniq
     rated.sort_by { |item| -rating_of(category, item) }.first
   end
 
   def favorite_brewery
-    return nil if ratings.empty?
     category = :brewery
+    return nil if ratings.empty?
 
     rated = ratings.map{ |r| r.beer.send(category) }.uniq
     rated.sort_by { |item| -rating_of(category, item) }.first
   end
 ```
 
-Nyt molempien metodien koodi on oikeastaan täysin sama. Yhteinen osa voidaankin eriyttää omaksi metodiksi:
+Nyt molempien metodien koodi on täysin sama. Yhteinen osa voidaankin eriyttää omaksi metodiksi:
 
 ```ruby
   def favorite_style
