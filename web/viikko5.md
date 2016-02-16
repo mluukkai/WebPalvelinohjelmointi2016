@@ -1166,4 +1166,3 @@ Commitoi kaikki tekemäsi muutokset ja pushaa koodi Githubiin. Deployaa myös uu
 
 Tehtävät kirjataan palautetuksi osoitteeseen http://wadrorstats2016.herokuapp.com/
 
-Tehtävien palautus onnistuu maanantaina
