@@ -106,7 +106,7 @@ Kokeillaan nyt etsiä konsolista käsin Helsingin ravintoloita (muista uudelleen
 2.2.1 :003 > HTTParty.get url+"helsinki"
 ```
 
-**HUOM:** voit siis nyt ja jatkossa käyttää vaihtoehtoisesti välimuistipalvelinta eli määritellä <code>url = http://stark-oasis-9187.herokuapp.com/api/</code>
+**HUOM:** voit siis nyt ja jatkossa käyttää vaihtoehtoisesti välimuistipalvelinta eli määritellä <code>url = 'http://stark-oasis-9187.herokuapp.com/api/'</code>
 
 Kutsu siis palauttaa luokan <code>HTTParty::Response</code>-olion. Oliolta voidaan kysyä esim. vastaukseen liittyvät headerit:
 
