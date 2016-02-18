@@ -153,7 +153,7 @@ Helsingistä tunnetaan siis 9 paikkaa. Tutkitaan ensimmäistä:
 2.2.1 :017 >
 ```
 
-Jälkimmäinen komento <code>locations.first.keys</code> kertoo mitä kenttiä ravintoloihin liittyy.
+Jälkimmäinen komento <code>places.first.keys</code> kertoo mitä kenttiä ravintoloihin liittyy.
 
 Hieman monimutkaisempia hasheja tutkiessa kannattaa huomata, että Rails tarjoaa komennon <code>pp</code>, jonka avulla hash on mahdollista tulostaa ihmisystävällisemmin muotoiltuna:
 
