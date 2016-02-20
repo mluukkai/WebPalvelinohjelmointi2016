@@ -15,7 +15,6 @@ describe "Beer" do
 
     it "a new beer is created if a valid name specified" do
       visit new_beer_path
-      save_and_open_page
       fill_in('beer_name', with:'CrapIPA')
       select('Lager', from:'beer[style]')
       expect{
