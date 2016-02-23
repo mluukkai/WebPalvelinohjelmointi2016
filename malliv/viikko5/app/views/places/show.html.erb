@@ -1,0 +1,7 @@
+<h2> <%= @place.name %> </h2>
+
+<p> <%= @place.street %> </p>
+
+<p> <%= "#{@place.zip} #{@place.city}" %> </p>
+
+<iframe src="<%=@place.map_url%>"</iframe>

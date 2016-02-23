@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Users</h1>
+
+<table>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.username, user %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

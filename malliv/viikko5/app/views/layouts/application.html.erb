@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ratebeer</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<body>
+  <div class="navibar">
+    <%= link_to 'breweries', breweries_path %>
+    <%= link_to 'beers', beers_path %>
+    <%= link_to 'styles', styles_path %>
+    <%= link_to 'ratings', ratings_path %>
+    <%= link_to 'users', users_path %>
+    <%= link_to 'clubs', beer_clubs_path %>
+    <%= link_to 'places', places_path %>
+    |
+  <% if current_user %>
+    <%= link_to current_user.username, current_user %>
+    <%= link_to "rate a beer", new_rating_path %>
+    <%= link_to "join a club", new_membership_path %>
+    <%= link_to "sign out", signout_path, method: :delete %>
+  <% else %>
+    <%= link_to "sign up",signup_path %>
+    <%= link_to "sign in",signin_path %>
+  <% end %>
+  </div>
+
+
+
+
+  <%= yield %>
+
+</body>
+</html>
