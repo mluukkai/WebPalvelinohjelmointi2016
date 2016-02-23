@@ -153,7 +153,7 @@ Helsingistä tunnetaan siis 9 paikkaa. Tutkitaan ensimmäistä:
 2.2.1 :017 >
 ```
 
-Jälkimmäinen komento <code>locations.first.keys</code> kertoo mitä kenttiä ravintoloihin liittyy.
+Jälkimmäinen komento <code>places.first.keys</code> kertoo mitä kenttiä ravintoloihin liittyy.
 
 Hieman monimutkaisempia hasheja tutkiessa kannattaa huomata, että Rails tarjoaa komennon <code>pp</code>, jonka avulla hash on mahdollista tulostaa ihmisystävällisemmin muotoiltuna:
 
@@ -900,7 +900,7 @@ eli tällä kertaa routeissa määriteltiin, että panimon id:hen viitataan <cod
 >
 > Tee sovellukselle ominaisuus, jossa ravintolan nimeä klikkaamalla avautuu oma sivu, jossa on näkyvillä ravintolan tiedot. Sisällytä sivulle (esim. iframena) myös kartta, johon on merkattu ravintolan sijainti. Huomaa, että kartan url löytyy suoraan ravintolan tiedoista. Jos haluat hifistellä, iframeja parempi vaihtoehto on [Googlen Map APIn](https://developers.google.com/maps/) käyttö.
 >
-> Jos näytät kartan iframessa, joudut muuttamaan kartan urlissa protokollan _http_:stä _https_:ksi jotta kartta toimisi herokussa. Paikallisesti suoritettaessa urlin protokollan tulee kuitenkin olla _http_
+> HUOM Jos käytät ravintolan tiedoissa olevaa karttaa iframessa, kartta ei toimi herokussa jos määrittelet selaimessa protokollaksi https, eli kirjoitat osoiteriville https://..., jos kirjoitat http://..., kartan pitäisi toimia myös herokussa.
 >
 >* ravintolan urliksi kannattaa vailta Rails-konvention mukainen places/:id, routes.rb voi näyttää esim. seuraavalta:
 >
