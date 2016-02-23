@@ -6,6 +6,113 @@ Jos otat edellisen viikon mallivastauksen tämän viikon pohjaksi, kopioi hakemi
 
 Osa tämän viikon tehtävistä saattaa hajottaa jotain edellisinä viikkoina tehtyjä testejä. Voit merkitä tehtävät testien hajoamisesta huolimatta, eli testien pitäminen kunnossa on vapaaehtoista.
 
+
+## Muistutus debuggerista
+
+Viikolla 2 tutustuimme [byebug-debuggeriin](https://github.com/mluukkai/WebPalvelinohjelmointi2016/blob/master/web/viikko2.md#debuggeri). Valitettavasti debuggeri ei ole vielä löytänyt tietänsä jokaisen kurssilaisen työkaluvalikoimaan.
+
+Debuggerin käyttö on erittäin helppoa. Riittää kirjoittaa komento <code>byebug</code> _mihin tahansa_ kohtaan sovelluksen koodia. Seuraavassa esimerkki:
+
+```ruby
+class PlacesController < ApplicationController
+   # ...
+
+  def search
+    byebug
+    @places = BeermappingApi.places_in(params[:city])
+    session[:previous_city] = params[:city]
+    if @places.empty?
+      redirect_to places_path, notice: "No locations in #{params[:city]}"
+    else
+      render :index
+    end
+  end
+end
+```
+
+Tarkastelemme siis debuggerilla BeermappingApia käyttävää osaa sovelluksesta. Kun nyt sovelluksella haetaan jotain olutravintolaa avaa debuggeri konsolisession koodiin merkittyyn kohtaan:
+
+```ruby
+[6, 15] in /Users/mluukkai/kurssirepot/wadror/ratebeer/app/controllers/places_controller.rb
+    6:     @place = BeermappingApi.find(params[:id],session[:previous_city] )
+    7:   end
+    8:
+    9:   def search
+   10:     byebug
+=> 11:     @places = BeermappingApi.places_in(params[:city])
+   12:     session[:previous_city] = params[:city]
+   13:     if @places.empty?
+   14:       redirect_to places_path, notice: "No locations in #{params[:city]}"
+   15:     else
+
+(byebug) params
+{"utf8"=>"✓", "authenticity_token"=>"KA26q0QTqbFhnyuql7k3W4iwGlgUky3wwz1PwypUy+4=", "city"=>"helsinki", "commit"=>"Search", "action"=>"search", "controller"=>"places"}
+(byebug) params[:city]
+"helsinki"
+(byebug)
+```
+
+eli pystymme mm. tarkastamaan että <code>params</code> hashin sisältö on sellainen kuin oletamme sen olevan.
+
+Suoritetaan sitten seuraava komento ja katsotaan että tulos on odotetun kaltainen:
+
+```ruby
+(byebug) next
+
+[7, 16] in /Users/mluukkai/kurssirepot/wadror/ratebeer/app/controllers/places_controller.rb
+    7:   end
+    8:
+    9:   def search
+   10:     byebug
+   11:     @places = BeermappingApi.places_in(params[:city])
+=> 12:     session[:previous_city] = params[:city]
+   13:     if @places.empty?
+   14:       redirect_to places_path, notice: "No locations in #{params[:city]}"
+   15:     else
+   16:       render :index
+
+(byebug) @places.size
+7
+(byebug) @places.first
+#<Place:0x007fc9d7491878 @id="6742", @name="Pullman Bar", @status="Beer Bar", @reviewlink="http://beermapping.com/maps/reviews/reviews.php?locid=6742", @proxylink="http://beermapping.com/maps/proxymaps.php?locid=6742&d=5", @blogmap="http://beermapping.com/maps/blogproxy.php?locid=6742&d=1&type=norm", @street="Kaivokatu 1", @city="Helsinki", @state=nil, @zip="00100", @country="Finland", @phone="+358 9 0307 22", @overall="72.500025", @imagecount="0">
+(byebug) @places.first.name
+"Pullman Bar"
+(byebug) continue
+```
+
+viimeinen komento jatkaa ohjelman normaalia suorittamista.
+
+Debuggerin voi siis käynnistää _mistä tahansa kohtaa_ sovelluksen koodia, myös testeistä tai jopa näkymistä. Kokeillaan debuggerin käynnistämistä uuden oluen luomislomakkeen renderöinnin aikana:
+
+```erb
+[10, 19] in /Users/mluukkai/kurssirepot/wadror/ratebeer/app/views/beers/_form.html.erb
+   10:       </ul>
+   11:     </div>
+   12:   <% end %>
+   13:
+   14:   <% byebug %>
+=> 15:
+   16:   <div class="field">
+   17:     <%= f.label :name %><br>
+   18:     <%= f.text_field :name %>
+   19:   </div>
+
+(byebug) @styles.size
+5
+(byebug) @styles.first
+#<Style id: 1, name: "European pale lager", description: "Similar to the Munich Helles story, many European c...", created_at: "2016-02-05 17:44:15", updated_at: "2015-02-05 18:21:13">
+(byebug) options_from_collection_for_select(@styles, :id, :name, selected: @beer.style_id)
+"<option value=\"1\">European pale lager</option>\n<option value=\"2\">American pale ale</option>\n<option value=\"3\">Baltic porter</option>\n<option value=\"4\">Weizen</option>\n<option value=\"5\">Sahti</option>"
+(byebug)
+```
+
+Näkymätemplateen on siis lisätty <code><% byebug %></code>. Kuten huomaamme, on jopa näkymän apumetodin <code>options_from_collection_for_select</code> kutsuminen mahdollista debuggerista käsin!
+
+Eli vielä kertauksena **kun kohtaat ongelman, turvaudu arvailun sijaan byebugiin!**
+
+Rails-konsolin käytön tärkeyttä sovelluskehityksen välineenä on yritetty korostaa läpi kurssin. Eli **kun teet jotain vähänkin epätriviaalia, testaa asia ensin konsolissa.** Joissain tilanteissa voi olla jopa parempi tehdä kokeilut debuggerin avulla avautuvassa konsolissa, sillä tällöin on mahdollista avata konsolisessio juuri siihen kontekstiin, mihin koodia ollaan kirjoittamassa. Näin ollen päästään käsiksi esim. muuttujiin <code>params</code>, <code>sessions</code> ym. suorituskontekstista riippuvaan dataan.
+
+
 ## Bootstrap
 
 Toistaiseksi emme ole kiinnittäneet ollenkaan huomiota sovelluksiemme ulkoasuun. Modernin ajattelun mukaan HTML-koodi määrittelee ainoastaan sivujen tietosisällön ja ulkoasu määritellään erillisissä CSS-tiedostoissa.
