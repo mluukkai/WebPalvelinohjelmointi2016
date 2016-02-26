@@ -139,7 +139,7 @@ Päätetään toteuttaa oluiden listalle toiminnallisuus, jonka avulla oluet voi
 </table>
 ```
 
-eli taulukon sarakkeiden otsikoista on nyt tehty linkit, jotka johtavat takaisin samalle sivulle mutta lisäävät pyyntöön parametrin <code>:order</code>, joka määrittelee halutun järjestyksen.
+eli taulukon sarakkeiden otsikoista on nyt tehty linkit, jotka johtavat takaisin samalle sivulle mutta lisäävät pyyntöön [query parametrin](https://en.wikipedia.org/wiki/Query_string) <code>:order</code>, joka määrittelee halutun järjestyksen. Käytännössä parametri välitetään urlin mukana liittäen se "normaalin" urlin perään kysymysmerkillä erottaen. Esim. jos klikataan tyylisaraketta, tulee urliksi _beers?order=style_
 
 Kontrolleri pääsee HTTP-pyynnön parametriin käsiksi <code>params</code>-hashin avulla ja kuten olettaa saattaa, suunnan määrittelevän parametrin arvo on <code>params[:order]</code>.
 
