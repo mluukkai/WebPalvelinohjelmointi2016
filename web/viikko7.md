@@ -1346,12 +1346,12 @@ end
   Brewery.create! name:"Brewery_#{i}", year:1900, active:true
 end
 
-bulk = Style.create! name:"bulk", description:"cheap, not much taste"
+bulk = Style.create! name:"Bulk", description:"cheap, not much taste"
 
 Brewery.all.each do |b|
   n = rand(beers_in_brewery)
   (1..n).each do |i|
-    beer = Beer.create! name:"beer #{b.id} -- #{i}", style:bulk
+    beer = Beer.create! name:"Beer #{b.id} -- #{i}", style:bulk
     b.beers << beer
   end
 end
