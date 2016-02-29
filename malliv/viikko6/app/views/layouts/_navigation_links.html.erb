@@ -1,0 +1,23 @@
+<li><%= link_to 'breweries', breweries_path %></li>
+<li><%= link_to 'beers', beers_path %></li>
+<li><%= link_to 'styles', styles_path %></li>
+<li><%= link_to 'ratings', ratings_path %></li>
+<li><%= link_to 'users', users_path %></li>
+<li><%= link_to 'clubs', beer_clubs_path %></li>
+<li><%= link_to 'places', places_path %></li>
+<% if not current_user.nil? %>
+  <li role="presentation" class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+      <%= current_user.username%> <span class="caret"></span>
+    </a>
+      <ul class="dropdown-menu">
+      <li><%= link_to 'my page', current_user %></li>
+      <li><%= link_to 'rate a beer', new_rating_path %></li>
+      <li><%= link_to 'join a club', new_membership_path %></li>
+      <li><%= link_to 'signout', signout_path, method: :delete %></li>
+    </ul>
+  </li>
+<% else %>
+  <li><%= link_to 'signin', signin_path %></li>
+  <li><%= link_to 'signup', signup_path %></li>
+<% end %>

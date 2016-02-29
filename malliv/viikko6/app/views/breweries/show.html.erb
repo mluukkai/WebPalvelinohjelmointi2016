@@ -1,0 +1,33 @@
+<h2><%= @brewery.name %>
+  <% if not @brewery.active  %>
+      <span class="label label-info">retired</span>
+  <% end %>
+</h2>
+
+<em>
+  Established at
+  <%= @brewery.year %>
+</em>
+
+<p>
+  Number of beers
+  <%= @brewery.beers.count %>
+</p>
+
+<p>
+  <% @brewery.beers.each do |beer| %>
+    <%= link_to beer.name, beer %>
+  <% end %>
+</p>
+
+<p>
+  <% if @brewery.ratings.empty? %>
+    brewery has no ratings
+  <% else %>
+    brewery has <%= pluralize(@brewery.ratings.count, 'rating') %>, average <%= round(@brewery.average_rating) %>
+  <% end %>
+</p>
+
+<%= edit_and_destroy_buttons(@brewery) %>
+
+<%= link_to "change activity", toggle_activity_brewery_path(@brewery.id), method: :post, class: "btn btn-primary" if current_user %>

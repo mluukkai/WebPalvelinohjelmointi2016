@@ -1,0 +1,51 @@
+<h2>Ratings</h2>
+
+
+<div class="row">
+  <div class="col-md-3">
+    <h4>Best beers</h4>
+    <%= render 'list', items: @beers %>
+  </div>
+  <div class="col-md-3">
+    <h4>Best breweries</h4>
+    <%= render 'list', items: @breweries %>
+  </div>
+  <div class="col-md-3">
+    <h4>Best styles</h4>
+    <%= render 'list', items: @styles %>
+  </div>
+</div>
+
+<h2>Most active users</h2>
+
+<table class="table table-hover table-condensed">
+  <thead>
+    <tr>
+      <th></th>
+      <th>favorite beer</th>
+      <th>favorite brewery</th>
+      <th>preferred style</th>
+      <th>ratings</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.username, user %></td>
+        <td><%= link_to user.favorite_beer.name, user.favorite_beer %></td>
+        <td><%= link_to user.favorite_brewery.name, user.favorite_brewery %></td>
+        <td><%= link_to user.favorite_style.name, user.favorite_style %></td>
+        <td><%= user.ratings.count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>Recent ratings</h2>
+
+<ul>
+  <% @recent.each do |rating| %>
+    <li> <%= rating %> <%= link_to rating.user.username, rating.user %></li>
+  <% end %>
+</ul>

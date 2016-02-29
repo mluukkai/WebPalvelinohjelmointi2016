@@ -1,0 +1,19 @@
+<h1>Listing Users</h1>
+
+<table class="table table-hover">
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td>
+          <%= link_to user.username, user %>
+        </td>
+        <td>
+          <% if admin_user and user.locked? %>
+            <span class="label label-info">account frozen</span>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

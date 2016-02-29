@@ -1,0 +1,58 @@
+<h2>
+  <%= @user.username %>
+  <% if admin_user and @user.locked? %>
+      <span class="label label-info">account frozen</span>
+  <% end %>
+</h2>
+
+<p>
+  Has made <%= pluralize(@user.ratings.count, 'rating') %>
+</p>
+
+<% if @user.ratings.any? %>
+  <dl class="dl-horizontal">
+    <dt>favorite beer<dt>
+    <dd><%= @user.favorite_beer.name %></dd>
+    <dt>preferred style<dt>
+    <dd><%= @user.favorite_style.name %></dd>
+    <dt>favorite brewery<dt>
+    <dd><%= @user.favorite_brewery.name %></dd>
+  </dl>
+<% end %>
+
+<% if @user.beer_clubs.any? %>
+  <p>
+    Member of
+    <% @user.beer_clubs.each do |club| %>
+      <%= link_to club.name, club %>
+    <% end %>
+  </p>
+<% else %>
+  <p>No club memberships</p>
+<% end %>
+
+<h3>Ratings</h3>
+
+<ul>
+  <% @user.ratings.each do |rating| %>
+    <li>
+      <%= rating %>
+      <% if @user == current_user %>
+<%= link_to '', rating, method: :delete, data: { confirm: 'Are you sure?' }, class:'glyphicon glyphicon-trash' %>
+
+
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<% if @user == current_user %>
+  <%= link_to 'Delete account', @user, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger' %>
+  <%= link_to 'Change password', edit_user_path(@user), class:'btn btn-warning' %>
+<% end %>
+
+<% if admin_user %>
+  <% label = @user.locked? ? 'unlock' : 'lock' %>
+  <%= link_to label, toggle_lock_user_path(@user.id), method: :post, class: "btn btn-primary"
+  %>
+<% end %>

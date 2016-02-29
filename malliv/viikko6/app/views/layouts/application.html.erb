@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Ratebeer" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Ratebeer" %>">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
+    <main role="main">
+      <%= render 'layouts/messages' %>
+
+      <div class="row">
+        <div class="col-md-8">
+          <%= yield %>
+        </div>
+        <div style="padding:20px" class="col-md-4">
+          <img src="http://www.cs.helsinki.fi/u/mluukkai/wadror/pint.jpg" width="200" class="img-rounded">
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
