@@ -1,7 +1,7 @@
 class ProperStylesToBeers < ActiveRecord::Migration
   def change
     add_column :beers, :style_id, :integer
-    rename_column :beers, :style. :old_style
+    rename_column :beers, :style, :old_style
 
     Beer.all.map(&:old_style).uniq.each do |name|
       Style.create name:name
