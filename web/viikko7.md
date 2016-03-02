@@ -1047,7 +1047,17 @@ Nyt capybara odottaa taulukon valmistumista ja siirtyy sivun avaavaan komentoon 
 >
 > Testaaminen kannattaa tehdä nyt siten, että etsitään taulukon rivit <code>find</code>-selektorin avulla ja varmistetaan, että jokaisella rivillä on oikea sisältö. Koska taulukossa on otsikkorivi, löytyy ensimmäinen varsinainen rivi seuraavasti:
 >
+> ``` ruby
 > find('table').find('tr:nth-child(2)')
+> ``` 
+>
+> tai seuraavasti (huomaa indekstointi!)
+>
+> ``` ruby
+> page.all('tr')[1].text
+> ```
+>
+> Jostain syystä ensimmäinen muoto ei toiminut Angularilla tehdyillä sivuilla. 
 >
 > Rivin sisältöä voi testata normaaliin tapaan expect ja have_content -metodeilla.
 
@@ -1056,6 +1066,9 @@ Nyt capybara odottaa taulukon valmistumista ja siirtyy sivun avaavaan komentoon 
 > Tee testit seuraaville toiminnallisuuksille
 > * klikattaessa saraketta 'style' järjestyvät oluet tyylin nimen mukaiseen aakkosjärjestykseen
 > * klikattaessa saraketta 'brewery' järjestyvät oluet panimon nimen mukaiseen aakkosjärjestykseen
+>
+> **Huom:** napin painaminen komennolla <code>click_link('brewery')</code> ei ehkä toimi Angularilla tehdyillä sivuilla. Klikkaa tällöin komennolla <code>page.all('a', :text => 'brewery').first.click</code>
+
 
 **Huom.** Travis ei osaa suoraan ajaa Selenium-testejä. Ongelmaan löytyy vastaus täältä  http://about.travis-ci.org/docs/user/gui-and-headless-browsers/#Using-xvfb-to-Run-Tests-That-Require-GUI-(e.g.-a-Web-browser)
 Travisin toimintaansaattaminen muutosten jälkeen on vapaaehtoista.
