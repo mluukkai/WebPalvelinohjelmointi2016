@@ -239,7 +239,7 @@ class BeersController < ApplicationController
 end
 ```
 
-Myös näkymä on views/beers/list.html.erb on minimalistinen:
+Myös näkymä views/beers/list.html.erb on minimalistinen:
 
 ```erb
 <h2>Beers</h2>
