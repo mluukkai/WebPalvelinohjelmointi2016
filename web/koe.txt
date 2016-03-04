@@ -1,0 +1,21 @@
+Virheilmon lukemista
+  undefined method for nil:NilClass
+  ActiveRecord::migrationspending
+  missing template -> controllerissa metodi, route määritetty
+  mutta ei templatea / näkymää
+
+Many-to-many
+  -Luo välitaulu -> membership, muista IDt!!!
+  -kirjota modeleihin has_many
+
+Suorituskyky
+  -cachetus
+    - fragment cache
+  -tietokantahaut (vältetään N+1 hakua, esim
+    Brewery.includes(:beers)
+
+MVC, REST
+
+"Tulee joku pyyntö johonkin, selitä mitä käy"
+
+render vs redirect_to
