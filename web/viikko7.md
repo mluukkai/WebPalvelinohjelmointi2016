@@ -777,7 +777,9 @@ Lisäsimme myös järjestämistä varten otsikot jotka ovat a-tagin sisällä, e
 ```javascript
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
 <script>
-    function BeersController($scope, $http) {
+   var myApp = angular.module('myApp', []);
+
+   myApp.controller("BeersController", function ($scope, $http) {
         $http.get('beers.json').success( function(data, status, headers, config) {
             $scope.beers = data;
         });
@@ -788,7 +790,7 @@ Lisäsimme myös järjestämistä varten otsikot jotka ovat a-tagin sisällä, e
             $scope.order = order;
             console.log(order);
         }
-    }
+   }
 </script>
 
 <h2>Beers</h2>
