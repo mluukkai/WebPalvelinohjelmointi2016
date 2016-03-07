@@ -786,11 +786,11 @@ Lisäsimme myös järjestämistä varten otsikot jotka ovat a-tagin sisällä, e
 
         $scope.order = 'name';
 
-        $scope.sort_by = function (order){
+        $scope.sort_by = function (order) {
             $scope.order = order;
             console.log(order);
         }
-   }
+   });
 </script>
 
 <h2>Beers</h2>
