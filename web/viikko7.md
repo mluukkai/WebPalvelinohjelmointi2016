@@ -1537,10 +1537,10 @@ myös silloin kun sivufragmentti löytyy välimuistista. Voisimmekin testata fra
 
       order = params[:order] || 'name'
 
-      case order
-        when 'name' then @beers.sort_by!{ |b| b.name }
-        when 'brewery' then @beers.sort_by!{ |b| b.brewery.name }
-        when 'style' then @beers.sort_by!{ |b| b.style.name }
+      @beers = case order
+        when 'name' then @beers.sort_by{ |b| b.name }
+        when 'brewery' then @beers.sort_by{ |b| b.brewery.name }
+        when 'style' then @beers.sort_by{ |b| b.style.name }
       end
     end
   end
@@ -1583,10 +1583,10 @@ Järjestys talletetaan siis muuttujaan <code>@order</code> kontrollerissa. Seura
   def index
     @beers = Beer.includes(:brewery, :style).all
 
-    case @order
-      when 'name' then @beers.sort_by!{ |b| b.name }
-      when 'brewery' then @beers.sort_by!{ |b| b.brewery.name }
-      when 'style' then @beers.sort_by!{ |b| b.style.name }
+    @beers = case @order
+      when 'name' then @beers.sort_by{ |b| b.name }
+      when 'brewery' then @beers.sort_by{ |b| b.brewery.name }
+      when 'style' then @beers.sort_by{ |b| b.style.name }
     end
   end
 ```
