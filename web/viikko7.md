@@ -1,4 +1,4 @@
-Jatkamme sovelluksen rakentamista siitä, mihin jäimme viikon 6 lopussa. Allaoleva materiaali olettaa, että olet tehnyt kaikki edellisen viikon tehtävät. Jos et tehnyt kaikkia tehtäviä, voit ottaa kurssin repositorioista [edellisen viikon mallivastauksen](https://github.com/mluukkai/WebPalvelinohjelmointi2016/tree/master/mallivastaukset/viikko6). Jos sait suurimman osan edellisen viikon tehtävistä tehtyä, saattaa olla helpointa, että täydennät vastaustasi mallivastauksen avulla.
+Jatkamme sovelluksen rakentamista siitä, mihin jäimme viikon 6 lopussa. Allaoleva materiaali olettaa, että olet tehnyt kaikki edellisen viikon tehtävät. Jos et tehnyt kaikkia tehtäviä, voit ottaa kurssin repositorioista [edellisen viikon mallivastauksen](https://github.com/mluukkai/WebPalvelinohjelmointi2016/tree/master/malliv/viikko6). Jos sait suurimman osan edellisen viikon tehtävistä tehtyä, saattaa olla helpointa, että täydennät vastaustasi mallivastauksen avulla.
 
 Jos otat edellisen viikon mallivastauksen tämän viikon pohjaksi, kopioi hakemisto muualle kurssirepositorion alta (olettaen että olet kloonannut sen) ja tee sovelluksen sisältämästä hakemistosta uusi repositorio.
 
@@ -239,7 +239,7 @@ class BeersController < ApplicationController
 end
 ```
 
-Myös näkymä on views/beers/list.html.erb on minimalistinen:
+Myös näkymä views/beers/list.html.erb on minimalistinen:
 
 ```erb
 <h2>Beers</h2>
@@ -777,18 +777,20 @@ Lisäsimme myös järjestämistä varten otsikot jotka ovat a-tagin sisällä, e
 ```javascript
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.min.js"></script>
 <script>
-    function BeersController($scope, $http) {
+   var myApp = angular.module('myApp', []);
+
+   myApp.controller("BeersController", function ($scope, $http) {
         $http.get('beers.json').success( function(data, status, headers, config) {
             $scope.beers = data;
         });
 
         $scope.order = 'name';
 
-        $scope.sort_by = function (order){
+        $scope.sort_by = function (order) {
             $scope.order = order;
             console.log(order);
         }
-    }
+   });
 </script>
 
 <h2>Beers</h2>
@@ -1047,7 +1049,17 @@ Nyt capybara odottaa taulukon valmistumista ja siirtyy sivun avaavaan komentoon 
 >
 > Testaaminen kannattaa tehdä nyt siten, että etsitään taulukon rivit <code>find</code>-selektorin avulla ja varmistetaan, että jokaisella rivillä on oikea sisältö. Koska taulukossa on otsikkorivi, löytyy ensimmäinen varsinainen rivi seuraavasti:
 >
+> ``` ruby
 > find('table').find('tr:nth-child(2)')
+> ``` 
+>
+> tai seuraavasti (huomaa indekstointi!)
+>
+> ``` ruby
+> page.all('tr')[1].text
+> ```
+>
+> Jostain syystä ensimmäinen muoto ei toiminut Angularilla tehdyillä sivuilla. 
 >
 > Rivin sisältöä voi testata normaaliin tapaan expect ja have_content -metodeilla.
 
@@ -1056,6 +1068,9 @@ Nyt capybara odottaa taulukon valmistumista ja siirtyy sivun avaavaan komentoon 
 > Tee testit seuraaville toiminnallisuuksille
 > * klikattaessa saraketta 'style' järjestyvät oluet tyylin nimen mukaiseen aakkosjärjestykseen
 > * klikattaessa saraketta 'brewery' järjestyvät oluet panimon nimen mukaiseen aakkosjärjestykseen
+>
+> **Huom:** napin painaminen komennolla <code>click_link('brewery')</code> ei ehkä toimi Angularilla tehdyillä sivuilla. Klikkaa tällöin komennolla <code>page.all('a', :text => 'brewery').first.click</code>
+
 
 **Huom.** Travis ei osaa suoraan ajaa Selenium-testejä. Ongelmaan löytyy vastaus täältä  http://about.travis-ci.org/docs/user/gui-and-headless-browsers/#Using-xvfb-to-Run-Tests-That-Require-GUI-(e.g.-a-Web-browser)
 Travisin toimintaansaattaminen muutosten jälkeen on vapaaehtoista.
@@ -1392,10 +1407,10 @@ Kokeile nyt miten sivujen suorituskykyyn vaikuttaa jos kommentoit pois äsken te
 
     order = params[:order] || 'name'
 
-    case order
-      when 'name' then @beers.sort_by!{ |b| b.name }
-      when 'brewery' then @beers.sort_by!{ |b| b.brewery.name }
-      when 'style' then @beers.sort_by!{ |b| b.style.name }
+    @beers = case order
+      when 'name' then @beers.sort_by{ |b| b.name }
+      when 'brewery' then @beers.sort_by{ |b| b.brewery.name }
+      when 'style' then @beers.sort_by{ |b| b.style.name }
     end
   end
 ```
@@ -1522,10 +1537,10 @@ myös silloin kun sivufragmentti löytyy välimuistista. Voisimmekin testata fra
 
       order = params[:order] || 'name'
 
-      case order
-        when 'name' then @beers.sort_by!{ |b| b.name }
-        when 'brewery' then @beers.sort_by!{ |b| b.brewery.name }
-        when 'style' then @beers.sort_by!{ |b| b.style.name }
+      @beers = case order
+        when 'name' then @beers.sort_by{ |b| b.name }
+        when 'brewery' then @beers.sort_by{ |b| b.brewery.name }
+        when 'style' then @beers.sort_by{ |b| b.style.name }
       end
     end
   end
@@ -1568,10 +1583,10 @@ Järjestys talletetaan siis muuttujaan <code>@order</code> kontrollerissa. Seura
   def index
     @beers = Beer.includes(:brewery, :style).all
 
-    case @order
-      when 'name' then @beers.sort_by!{ |b| b.name }
-      when 'brewery' then @beers.sort_by!{ |b| b.brewery.name }
-      when 'style' then @beers.sort_by!{ |b| b.style.name }
+    @beers = case @order
+      when 'name' then @beers.sort_by{ |b| b.name }
+      when 'brewery' then @beers.sort_by{ |b| b.brewery.name }
+      when 'style' then @beers.sort_by{ |b| b.style.name }
     end
   end
 ```
